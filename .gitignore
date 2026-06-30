@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist-info/
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Lokální nastavení a stav (šablona: settings.example.json)
+settings.json
+dm40_ui_state.json
+
+# IDE / editor
+.cursor/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logy a dočasné soubory
+*.log
+*.tmp
+
+# Lokální poznámky / sniff logy (obsahují MAC, protokol z vývoje)
+sniffing.txt
+nRF_connect_ble_log.txt
+
+# Release artefakty (zip vytváří release_zip.bat)
+release/
+*.zip

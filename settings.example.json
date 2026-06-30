@@ -1,0 +1,12 @@
+{
+  "target_mac": "",
+  "model_name": "",
+  "device_counts": 0,
+  "window_scale": 1.0,
+  "show_graph": false,
+  "debug_click_hotspots": false,
+  "debug_display_layout": false,
+  "mini_app": false,
+  "always_on_top": false,
+  "raw_console": false
+}
