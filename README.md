@@ -147,7 +147,7 @@ DM40-Wireless/
 
 ## Licence
 
-Zatím bez explicitní licence — kontaktuj vlastníka repozitáře [Urobotos](https://github.com/Urobotos) před komerčním použitím.
+Projekt je pod licencí [MIT](LICENSE) — Copyright (c) 2026 Urobotos.
 
 ---
 
