@@ -19,12 +19,15 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 
 ---
 
-## Installation for end users (no Python)
+## Installation for end users (no Python, command line etc.)
 
-1. Open [Releases](https://github.com/Urobotos/DM40-Wireless/releases) on GitHub and download **`DM40-Wireless-win64.zip`**.
-2. Extract the zip to any folder (e.g. `C:\Apps\DM40 Wireless\`).
-3. Run **`DM40 Wireless.exe`**.
-4. On first launch, the **Connect** screen appears — search for your meter, select it in the list, and click **Connect**. The MAC address is saved to `settings.json` next to the exe; on the next launch the app connects automatically.
+**1.** Open [Releases](https://github.com/Urobotos/DM40-Wireless/releases) on GitHub and download **`DM40-Wireless-win64.zip`**
+
+**2.** Extract the zip to any folder (e.g. `C:\Apps\DM40 Wireless\`)
+
+**3.** Run **`DM40 Wireless.exe`**
+
+**4.** On first launch, the **Connect** screen appears — search for your meter, select it in the list, and click **Connect**. The MAC address is saved to `settings.json` next to the exe; on the next launch the app connects automatically.
 
 > The distribution package is the full `dist\DM40 Wireless` build folder (exe + libraries). Do not move the `.exe` alone — it must stay next to the `_internal` folder and `images`.
 
