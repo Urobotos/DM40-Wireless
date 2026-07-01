@@ -79,13 +79,13 @@ copy settings.example.json settings.json
 
 | Area | Action |
 |------|--------|
-| **AUTO+** (top left) | Opens the **range** (RANGE) menu for the current mode |
-| **RUN / HOLD** | Toggles measurement hold |
+| **AUTO+** (top bar on left) | Opens the **range** (RANGE) menu for the current mode |
+| **RUN / HOLD** (top bar on left) | Toggles measurement hold |
 | **MODE buttons** (bottom row) | Cycle sub-modes: VDC/VAC, ADC/AAC, OHM, CAP, DIODE/CONT, Hz/TEMP |
-| **Main display digits** | Click saves the current reading to the first free **save slot** (max. 6) |
-| **Save slots** | Click on the display digits to save values ​​to slots, hold to clear slots |
+| **Display digits** | Click saves the current reading to the first free **save slot** (max. 6) |
+| **Save slots** | Click on the display digits to save values ​​to slots, hold display digits to clear slots |
 | **Graph** | Live measurement plot (hidden in Mini app mode), hold in the graph area to clear it |
-| **Settings icon** (top right) | Opens **Settings** |
+| **Settings icon** (top bar on right) | Opens **Settings** |
 
 Connection status, meter battery, and units are shown in the top bar from live BLE data.
 
