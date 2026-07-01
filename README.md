@@ -53,6 +53,21 @@ copy settings.example.json settings.json
 ```
 
 ---
+## 📱 App Screenshots:
+
+<br>
+
+<p align="center" width="100%">
+    <img width="30%" src="images/screenshot_main.png">
+    <img width="30%" src="images/screenshot_main2.png">
+    <img width="30%" src="images/screenshot_range.png">
+    <img width="30" src="images/screenshot_settings.png">
+
+</p>
+
+<br><br>
+
+---
 
 ## Using the app
 
