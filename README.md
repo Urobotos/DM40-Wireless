@@ -47,7 +47,7 @@ Then start the app using one of these:
 |--------|-------------|
 | **`DM40 Wireless.bat`** | Recommended — runs `app.pyw` without a console (uses venv if present) |
 | **`app.pyw`** | Double-click or `pythonw app.pyw` — no console |
-| **`app.py`** | `python app.py` — with console (debugging, logs) |
+| **`app.py`** | PowerShell cmd: `python app.py` — with console (debugging, logs) |
 
 On first run, copy the settings template:
 
