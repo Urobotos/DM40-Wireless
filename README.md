@@ -192,7 +192,7 @@ DM40-Wireless/
 
 This project is licensed under the [MIT License](LICENSE) — Copyright (c) 2026 Urobotos.
 <p align="left" width="100%">
-    <img width="5%" src="images/bin_urobotoss.png">
+    <img width="100%" src="images/bin_urobotos.png">
 </p>
 <br>
 
