@@ -63,13 +63,13 @@ copy settings.example.json settings.json
 ## App Screenshots:
 
 <p align="left" width="100%">
-    <img width="45%" src="images/screenshot_main.png">
-    <img width="45%" src="images/screenshot_main2.png">
-    <img width="45%" src="images/screenshot_range.png">
-    <img width="45%" src="images/screenshot_settings.png">
-    <img width="45%" src="images/screenshot_raw_console.png">
-    <img width="45%" src="images/screenshot_connect.png">
-    <img width="45%" src="images/screenshot_mini_app.png">
+    <img width="43%" src="images/screenshot_main.png">
+    <img width="43%" src="images/screenshot_main2.png">
+    <img width="43%" src="images/screenshot_range.png">
+    <img width="43%" src="images/screenshot_settings.png">
+    <img width="43%" src="images/screenshot_raw_console.png">
+    <img width="43%" src="images/screenshot_connect.png">
+    <img width="43%" src="images/screenshot_mini_app.png">
 </p>
 
 ---
