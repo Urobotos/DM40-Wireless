@@ -1,7 +1,7 @@
 # DM40 Wireless
 
 <p align="center" width="100%">
-    <img width="40%" src="images/alientek.png">
+    <img width="50%" src="images/alientek.png">
 </p>
 
 A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the wireless **Alientek DM40** multimeter (DM40A, DM40B, DM40C). The UI mirrors the device display, including measurement modes, ranges, HOLD, and saved values.
