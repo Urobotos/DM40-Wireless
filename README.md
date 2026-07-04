@@ -188,18 +188,28 @@ DM40-Wireless/
 
 ---
 
-## License:
+## Notes:
 
-This project is licensed under the [MIT License](LICENSE) — Copyright (c) 2026 Urobotos.
-
-<img src="images/bin_urobotos.png" width="100">
+- This is not an official Alientek product; it is a community / enthusiast project.
+- Bluetooth must be enabled in Windows; if BT is off, the app shows a warning.
 
 
 <br>
 
 ---
 
-## Notes:
+## License:
 
-- This is not an official Alientek product; it is a community / enthusiast project.
-- Bluetooth must be enabled in Windows; if BT is off, the app shows a warning.
+<p align="center" width="100%" text="strong">
+     This project is licensed under the MIT License — Copyright (c) 2026 Urobotos.
+</p>
+
+<p align="center" width="100%">
+    <img width="100" src="images/bin_urobotos.png">
+</p>
+
+&nbsp; [MIT License](LICENSE)
+<br>
+<br>
+
+
