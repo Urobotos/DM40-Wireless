@@ -1,7 +1,7 @@
 # DM40 Wireless
 
 <p align="center" width="100%">
-    <img width="40%" src="images/alientek.png">
+    <img width="50%" src="images/alientek.png">
 </p>
 
 A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the wireless **Alientek DM40** multimeter (DM40A, DM40B, DM40C). The UI mirrors the device display, including measurement modes, ranges, HOLD, and saved values.
@@ -63,13 +63,13 @@ copy settings.example.json settings.json
 ## App Screenshots:
 
 <p align="left" width="100%">
-    <img width="45%" src="images/screenshot_main.png">
-    <img width="45%" src="images/screenshot_main2.png">
-    <img width="45%" src="images/screenshot_range.png">
-    <img width="45%" src="images/screenshot_settings.png">
-    <img width="45%" src="images/screenshot_raw_console.png">
-    <img width="45%" src="images/screenshot_connect.png">
-    <img width="45%" src="images/screenshot_mini_app.png">
+    <img width="44%" src="images/screenshot_main.png">
+    <img width="44%" src="images/screenshot_main2.png">
+    <img width="44%" src="images/screenshot_range.png">
+    <img width="44%" src="images/screenshot_settings.png">
+    <img width="44%" src="images/screenshot_raw_console.png">
+    <img width="44%" src="images/screenshot_connect.png">
+    <img width="44%" src="images/screenshot_mini_app.png">
 </p>
 
 ---
