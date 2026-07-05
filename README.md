@@ -77,7 +77,6 @@ Then start the app using one of these:
     <img width="44%" src="images/screenshot_range.png">
     <img width="44%" src="images/screenshot_settings.png">
     <img width="44%" src="images/screenshot_raw_console.png">
-    <img width="44%" src="images/screenshot_connect.png">
     <img width="44%" src="images/screenshot_mini_app.png">
 </p>
 
@@ -88,6 +87,8 @@ Then start the app using one of these:
 ## Using the app:
 
 ### Connect screen (first launch / empty MAC)
+
+<img width="44%" src="images/screenshot_connect.png">
 
 - **Search** — scan for nearby DM40 BLE devices
 - Click a list row — select a device
