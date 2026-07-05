@@ -96,7 +96,7 @@ Then start the app using one of these:
 ### Main screen
 
 <p align="left" width="100%">
-    <img width="45%" src="images/manual.png">
+    <img width="54%" src="images/manual.png">
 </p>
 
 | Area | Action |
@@ -107,7 +107,8 @@ Then start the app using one of these:
 | **4. Display digits** | Main display digits |
 | **5. Save slots** | Click on the **display digits** to save values ​​to slots (max. 6), hold on display digits to clear slots |
 | **6. Graph** | Live measurement plot (hidden in Mini app mode), hold in the graph area to clear it |
-| **7. Settings icon** ⚙️ | Opens **Settings screen** |
+| **7. Settings** ⚙️ | Opens **Settings screen** |
+| **8. REL button** | REL = **Relative mode**, click to set, hold button to cancel |
 
 Connection status, meter battery, and units are shown in the top bar from live BLE data.
 
