@@ -96,7 +96,7 @@ Then start the app using one of these:
 ### Main screen
 
 <p align="left" width="100%">
-    <img width="45%" src="images/manual.png">
+    <img width="50%" src="images/manual.png">
 </p>
 
 | Area | Action |
