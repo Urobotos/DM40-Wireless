@@ -100,8 +100,8 @@ Then start the app using one of these:
 
 | Area | Action |
 |------|--------|
-| **1. AUTO+** | Opens the **RANGE screen** menu for the current mode |
-| **2. RUN / HOLD** | Toggles measurement hold |
+| **1. AUTO+** | Opens the **RANGE screen** menu for the current mode (Clickable) |
+| **2. RUN / HOLD** | Toggles measurement hold (Clickable) |
 | **3. MODE buttons** | Cycle sub-modes: VDC/VAC, ADC/AAC, OHM, CAP, DIODE/CONT, Hz/TEMP |
 | **4. Display digits** | Main display digits |
 | **5. Save slots** | Click on the **display digits** to save values ​​to slots (max. 6), hold on display digits to clear slots |
@@ -144,9 +144,9 @@ The file lives next to the exe or in the project root. It is not committed to gi
 | `model_name` | `DM40A`, `DM40B`, or `DM40C` |
 | `device_counts` | Range count scale (40k / 50k / 60k) |
 | `window_scale` | Window scale (`1.0` = 480×300 logical px) |
-| `mini_app` | Mini mode |
-| `always_on_top` | Always on top |
-| `raw_console` | RAW console |
+| `mini_app` | Mini mode (boolean: false / true) |
+| `always_on_top` | Always on top (boolean: false / true) |
+| `raw_console` | RAW console (boolean: false / true) |
 
 <br>
 
