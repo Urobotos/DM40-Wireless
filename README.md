@@ -144,9 +144,9 @@ The file lives next to the exe or in the project root. It is not committed to gi
 | `model_name` | `DM40A`, `DM40B`, or `DM40C` |
 | `device_counts` | Range count scale (40k / 50k / 60k) |
 | `window_scale` | Window scale (`1.0` = 480×300 logical px) |
-| `mini_app` | Mini mode (Boolean: false / true) |
-| `always_on_top` | Always on top (Boolean: false / true) |
-| `raw_console` | RAW console (Boolean: false / true) |
+| `mini_app` | Mini mode (boolean: false / true) |
+| `always_on_top` | Always on top (boolean: false / true) |
+| `raw_console` | RAW console (boolean: false / true) |
 
 <br>
 
