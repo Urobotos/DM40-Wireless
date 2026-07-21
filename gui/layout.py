@@ -153,7 +153,7 @@ MINI_SCREEN_H = MINI_MODE_BTN_Y + MODE_BTN_H + MODE_BTN_BOTTOM_MARGIN
 
 # RAW konzole pod hlavní obrazovkou (referenční px při scale 1.0)
 RAW_CONSOLE_H = 200           # výška konzole
-RAW_CONSOLE_FONT = 10         # velikost textu v konzoli
+RAW_CONSOLE_FONT = 9          # velikost textu v konzoli
 RAW_CONSOLE_MAX_LINES = 200   # maximální počet řádků v konzoli
 RAW_CONSOLE_POLL_MS = 230     # poll TX/RX: max 1 řádek / interval; zbytek se zahodí
 
