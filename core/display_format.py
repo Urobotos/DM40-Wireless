@@ -1,4 +1,4 @@
-"""Formátování čísel na displeji – rezervovaný sloupec pro znaménko (Consolas)."""
+"""Format numbers on the display – reserved sign column (Consolas)."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ def format_signed(
     *,
     int_digits: int | None = None,
 ) -> str:
-    """Vrátí číslo s pevným sloupcem znaménka: mezera nebo ``-`` (bez posunu textu)."""
+    """Return number with fixed sign column: space or ``-`` (text does not shift)."""
     if value_str in ("OL", "---", ""):
         return value_str
     try:
@@ -29,10 +29,10 @@ def format_signed(
 
 
 def split_main_value(value_str: str, decimals: int) -> tuple[str, str, str]:
-    """Rozdělí hlavní hodnotu na znaménko, tělo a režim zobrazení.
+    """Split main value into sign, body, and display mode.
 
     Returns:
-        (sign, body, mode) kde mode je ``numeric``, ``ol`` nebo ``text``.
+        (sign, body, mode) where mode is ``numeric``, ``ol``, or ``text``.
     """
     if value_str == "OL":
         return (" ", "OL", "ol")
@@ -69,7 +69,7 @@ def combined_main_value_str(
     *,
     overload: bool,
 ) -> str:
-    """Hlavní displej VDC+AC / ADC+AC – vyšší absolutní složka (AC nebo DC)."""
+    """Main display for VDC+AC / ADC+AC – larger absolute component (AC or DC)."""
     if overload:
         return "OL"
     if kind not in ("VDC+AC", "ADC+AC"):

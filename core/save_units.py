@@ -1,4 +1,4 @@
-"""Mapování jednotek na PNG pro save sloty (images/save_area/)."""
+"""Map display units to PNG files for save slots (images/save_area/)."""
 
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ SAVE_UNIT_FILES: dict[str, str] = {
 
 
 def save_unit_filename(kind: str, display_unit: str) -> str | None:
-    """Základní (oranžový) PNG jednotky pro uložení do slotu – bez AC/DC symbolů."""
+    """Base (orange) unit PNG for saving to a slot – without AC/DC symbols."""
     if kind == "TEMP":
         display_unit = "°C"
     if not display_unit:
@@ -43,7 +43,7 @@ def save_unit_filename(kind: str, display_unit: str) -> str | None:
 
 
 def save_unit_sprite_filename(base_fname: str | None, *, active: bool) -> str | None:
-    """PNG pro vykreslení – aktivní slot: oranžová verze, ostatní: *_white.png."""
+    """PNG for rendering – active slot: orange version, others: *_white.png."""
     if not base_fname:
         return None
     if active:

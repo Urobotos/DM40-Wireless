@@ -1,4 +1,4 @@
-"""Logika MODE tlačítek (rotace, paměť skupin)."""
+"""MODE button logic (rotation, group memory)."""
 
 import json
 from .config import UI_STATE_PATH
@@ -39,7 +39,7 @@ BTN_LABELS = {
 
 
 def btn_label(cmd_key: str) -> str:
-    """返回模式按钮的显示标签（已国际化回退）。"""
+    """Return display label for mode button (with i18n fallback)."""
     from core.i18n import t
     return t(f"mode_btn.{cmd_key}") if cmd_key in BTN_LABELS else cmd_key
 
@@ -94,7 +94,7 @@ class ModeState:
         return create_command(COMMANDS[group["options"][group["index"]]])
 
     def sync_from_kind(self, kind: str) -> bool:
-        """Synchronizuje MODE stav z druhu měření; True = tlačítka je třeba překreslit."""
+        """Sync MODE state from measurement kind; True = buttons need redraw."""
         cmd_key = KIND_TO_CMD.get(kind)
         if not cmd_key:
             return False

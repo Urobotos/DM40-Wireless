@@ -1,4 +1,4 @@
-"""DM40 BLE protokol – konstanty pro parsování měřicích rámců."""
+"""DM40 BLE protocol – constants for parsing measurement frames."""
 
 HEADER = b"\xdf\x05\x03\x09"
 MODEL_PACKET_PREFIX = b"\xdf\x05\x03\x08\x14"
@@ -31,12 +31,12 @@ VOLTAGE_RANGE_SLOT = {
 }
 
 def range_screen_title(kind: str) -> str:
-    """返回给定测量类型的量程界面标题（已国际化）。"""
+    """Return internationalized range screen title for the given measurement kind."""
     from core.i18n import t
     key = kind.replace("+", "_plus_")
     return t(f"range_titles.{key}")
 
-# 保留 RANGE_SCREEN_TITLES 作为向后兼容的默认回退
+# Keep RANGE_SCREEN_TITLES as backward-compatible default fallback
 RANGE_SCREEN_TITLES = {
     "VDC": "Voltage Settings",
     "VAC": "Voltage Settings",
@@ -143,7 +143,7 @@ RES_SCALE_MAP = {
     0x26: (6e7, "MΩ", 1e-6, 3),
 }
 
-# CONT (continuity) – při sepnutí sond často scale 0x84 (132), ne běžný RES rozsah
+# CONT (continuity) – probe short often uses scale 0x84 (132), not a normal RES range
 CONT_SCALE_MAP = {
     0x84: (600.0, "Ω", 1.0, 2),
     0x04: (600.0, "Ω", 1.0, 2),

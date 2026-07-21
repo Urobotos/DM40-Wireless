@@ -1,26 +1,26 @@
-"""国际化模块 – 基于 TOML 的多语言支持，零额外依赖。
+"""Internationalization module – TOML-based multilingual support, zero extra dependencies.
 
-纯翻译引擎，不直接读写配置文件。语言代码由调用方传入。
+Pure translation engine; does not read or write config files directly. Language code is passed in by the caller.
 
-用法::
+Usage::
 
     from core.i18n import t, get_i18n
 
-    # 初始化（应用启动时，语言代码来自 settings.json）
+    # Initialize at app startup (language code from settings.json)
     i18n = get_i18n()
-    i18n.init("en-US")            # 或 i18n.init("zh-CN")
+    i18n.init("en-US")            # or i18n.init("zh-CN")
 
-    # 获取翻译
-    msg = t("setup.status_scan_error", error="蓝牙不可用")
+    # Fetch translation
+    msg = t("setup.status_scan_error", error="Bluetooth unavailable")
 
-    # 切换语言
+    # Switch language
     i18n.load_language("zh-CN")
 
-    # 列出可用语言
+    # List available languages
     langs = i18n.available_languages()  # {"en-US": "English (US)", "zh-CN": "简体中文", ...}
 
-语言文件存放于 ``i18n/`` 目录，按 BCP 47 格式命名（如 ``en-US.toml``、``zh-CN.toml``）。
-文件首行注释 ``# language name: <显示名称>`` 用于在设置界面展示语言名称。
+Language files live in ``i18n/``, named in BCP 47 format (e.g. ``en-US.toml``, ``zh-CN.toml``).
+The first-line comment ``# language name: <display name>`` is shown in the Settings language picker.
 """
 
 from __future__ import annotations
@@ -31,13 +31,13 @@ from typing import Any
 
 
 def i18n_dir() -> Path:
-    """返回 i18n/ 目录路径，兼容开发环境和 PyInstaller 打包。"""
+    """Return the i18n/ directory path; works in dev and PyInstaller bundles."""
     from core.config import PROJECT_ROOT
     return PROJECT_ROOT / "i18n"
 
 
 class _I18n:
-    """线程不安全的单例；所有 GUI 访问均在主线程上。"""
+    """Not thread-safe singleton; all GUI access runs on the main thread."""
 
     def __init__(self) -> None:
         self._lang: str = ""
@@ -51,19 +51,19 @@ class _I18n:
     # ------------------------------------------------------------------
 
     def init(self, language: str) -> None:
-        """用给定语言代码初始化（首次加载）。必须在首次调用 ``t()`` 之前调用。
+        """Initialize with the given language code (first load). Must run before the first ``t()`` call.
 
-        先加载 ``en-US.toml`` 作为回退，再加载 ``language`` 对应的文件。
+        Loads ``en-US.toml`` as fallback, then the file for ``language``.
         """
         if self._initialized:
             return
         self._initialized = True
 
-        # 加载英文回退
+        # Load English fallback
         en_path = i18n_dir() / "en-US.toml"
         self._load_fallback(en_path)
 
-        # 加载目标语言
+        # Load target language
         lang = language.strip() if language else "en-US"
         if lang != "en-US" or not self._strings:
             if not self.load_language(lang):
@@ -73,9 +73,9 @@ class _I18n:
         self.available_languages()
 
     def t(self, key: str, **fmt_kwargs: Any) -> str:
-        """获取 ``key`` 的翻译文本，应用 ``**fmt_kwargs`` 占位符替换。
+        """Return translation for ``key``, applying ``**fmt_kwargs`` placeholder substitution.
 
-        回退链：当前语言 → 英文 → key 本身。
+        Fallback chain: current language → English → key itself.
         """
         template = self._strings.get(key) or self._fallback.get(key) or key
         if not fmt_kwargs:
@@ -87,11 +87,11 @@ class _I18n:
 
     @property
     def language(self) -> str:
-        """当前语言代码。"""
+        """Current language code."""
         return self._lang
 
     def available_languages(self) -> dict[str, str]:
-        """扫描 ``i18n/`` 目录，返回 ``{语言代码: 显示名称}``。"""
+        """Scan ``i18n/`` and return ``{language_code: display_name}``."""
         d = i18n_dir()
         if not d.is_dir():
             self._available = {}
@@ -106,9 +106,9 @@ class _I18n:
         return dict(result)
 
     def load_language(self, lang: str) -> bool:
-        """从 ``i18n/{lang}.toml`` 加载语言。返回 True 表示成功。
+        """Load language from ``i18n/{lang}.toml``. Returns True on success.
 
-        不影响回退字典，加载失败时当前翻译保持不变。
+        Does not affect the fallback dict; on failure current strings are unchanged.
         """
         path = i18n_dir() / f"{lang}.toml"
         return self._load_toml(path, lang)
@@ -119,9 +119,9 @@ class _I18n:
 
     @staticmethod
     def _read_lang_name(path: Path) -> str:
-        """从 TOML 文件首行注释提取语言显示名称。
+        """Extract language display name from the first-line TOML comment.
 
-        支持的格式：``# language name: English`` 或 ``# language name:简体中文``。
+        Supported formats: ``# language name: English`` or ``# language name:简体中文``.
         """
         try:
             first_line = path.read_text("utf-8").split("\n", 1)[0].strip()
@@ -136,7 +136,7 @@ class _I18n:
         return path.stem
 
     def _load_toml(self, path: Path, label: str) -> bool:
-        """加载并展平 TOML 文件到 self._strings。"""
+        """Load and flatten TOML file into self._strings."""
         try:
             raw = tomllib.loads(path.read_text("utf-8"))
         except (OSError, tomllib.TOMLDecodeError):
@@ -149,7 +149,7 @@ class _I18n:
         return True
 
     def _load_fallback(self, path: Path) -> None:
-        """加载英文回退字典。"""
+        """Load English fallback dictionary."""
         try:
             raw = tomllib.loads(path.read_text("utf-8"))
             self._fallback = self._flatten(raw)
@@ -158,7 +158,7 @@ class _I18n:
 
     @staticmethod
     def _flatten(data: dict, prefix: str = "") -> dict[str, str]:
-        """递归展平嵌套 TOML 表为 ``section.key`` 格式的扁平字典。"""
+        """Recursively flatten nested TOML tables into ``section.key`` flat dict."""
         result: dict[str, str] = {}
         for key, value in data.items():
             full_key = f"{prefix}.{key}" if prefix else key
@@ -177,7 +177,7 @@ _i18n_instance: _I18n | None = None
 
 
 def get_i18n() -> _I18n:
-    """获取（或创建）``_I18n`` 单例。"""
+    """Get (or create) the ``_I18n`` singleton."""
     global _i18n_instance
     if _i18n_instance is None:
         _i18n_instance = _I18n()
@@ -186,5 +186,5 @@ def get_i18n() -> _I18n:
 
 
 def t(key: str, **fmt_kwargs: Any) -> str:
-    """便捷函数：获取翻译文本。等价于 ``get_i18n().t(key, ...)``。"""
+    """Shortcut: return translation. Same as ``get_i18n().t(key, ...)``."""
     return get_i18n().t(key, **fmt_kwargs)
