@@ -51,7 +51,7 @@ cd DM40-Wireless
 .\install.bat
 ```
 
-*(install.bat creates .venv and installs dependencies from requirements.txt)*
+*( `install.bat` creates `.venv` and installs dependencies from `requirements.txt` )* <br><br>
 
 On first run, copy the settings template:
 
@@ -59,6 +59,7 @@ On first run, copy the settings template:
 copy settings.example.json settings.json
 ```
 
+<br>
 Then start the app using one of these:
 
 | Method | Description |
