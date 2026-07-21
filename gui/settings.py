@@ -17,7 +17,7 @@ DEFAULTS = {
     "mini_app": False,
     "always_on_top": False,
     "raw_console": False,
-    "language": "zh-CN",
+    "language": "en-US",
 }
 
 
