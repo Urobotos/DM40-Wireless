@@ -1,4 +1,4 @@
-"""Parsování DM40 měřicích NOTIFY rámců."""
+"""Parse DM40 measurement NOTIFY frames."""
 
 from .protocol_constants import (
     ALT_SCALE_MAP,
@@ -15,7 +15,7 @@ from .protocol_constants import (
 )
 from .ranges import range_display_label
 
-# Měřicí rámec: DF 05 03 09 [0B] flag status … scale@9 … M3@10 M2@12 M1@14 (viz snifing.txt CONT TEST)
+# Measurement frame: DF 05 03 09 [0B] flag status … scale@9 … M3@10 M2@12 M1@14 (see sniffing.txt CONT TEST)
 _MEAS_SUBTYPE = 0x0B
 _FLAG_BYTE = 5
 _STATUS_BYTE = 6
@@ -168,7 +168,7 @@ def process_slot(slot_type: str, counts: int, sign_flag: int, kind: str):
         if ol:
             return "OL", "%"
         sign = -1 if (sign_flag & 1) else 1
-        # ADC: -00.00 % (2 des. místa, scale 0.01); AAC/VAC: 0.0 % (scale 0.1)
+        # ADC: -00.00 % (2 decimal places, scale 0.01); AAC/VAC: 0.0 % (scale 0.1)
         scale = 0.01 if kind == "ADC" else 0.1
         decimals = 2 if kind == "ADC" else 1
         val_disp = sign * counts * scale

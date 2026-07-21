@@ -1,4 +1,4 @@
-"""Hlavní okno aplikace – přepínání Main / Range / Settings obrazovky."""
+"""Main application window – Main / Range / Settings screen switching."""
 
 import time
 
@@ -7,6 +7,7 @@ import tkinter as tk
 from ble.worker import BleCallbacks, BleWorker
 from core.config import CMD_DISCOVERY, CMD_POLL
 from core.protocol_constants import CMD_ID
+from core.i18n import t, get_i18n
 from gui import layout as display_layout
 from core.modes import MODE_CYCLE_GROUPS, ModeState
 from core.parsing import MODEL, range_label_from_packet
@@ -27,6 +28,10 @@ class DM40App:
         self.root = root
         self.settings = load_settings()
         apply_saved_model(self.settings)
+
+        # Initialize i18n from language in settings.json
+        lang = (self.settings.get("language") or "").strip() or "en-US"
+        get_i18n().init(lang)
         self.scale = float(self.settings.get("window_scale", 1.0))
         self.mode_state = ModeState()
         for gid, opts in MODE_CYCLE_GROUPS:
@@ -36,7 +41,7 @@ class DM40App:
         self._current_screen = "main"
         self._client_w = int(display_layout.SCREEN_W * self.scale)
 
-        self.root.title("DM40 Wireless")
+        self.root.title(t("app.title"))
         self.root.resizable(False, False)
         self.root.configure(bg=rgb_hex("background"))
 
@@ -113,6 +118,30 @@ class DM40App:
         self.setup_screen.on_hide()
         self.show_main_screen()
 
+    def reload_language(self, lang_code: str) -> None:
+        """Switch language, refresh all screens, and update settings.json."""
+        i18n = get_i18n()
+        if not i18n.load_language(lang_code):
+            return
+        # Atomic settings.json write (.tmp then replace, prevents corruption)
+        self.settings["language"] = lang_code
+        from gui.settings import save_settings
+        if not save_settings(self.settings):
+            # Save failure does not block UI refresh; in-memory language still applies this session
+            pass
+        # Refresh UI
+        self.root.title(t("app.title"))
+        self._refresh_all_screens_i18n()
+
+    def _refresh_all_screens_i18n(self) -> None:
+        """Refresh translatable strings on every screen (language is switched from Settings)."""
+        self.main_screen.refresh_all()
+        kind = self.mode_state.get_active_kind()
+        self.range_screen.rebuild_for_kind(kind, self._last_range_flag)
+        self.settings_screen.rebuild()
+        self.setup_screen.refresh_all()
+        self._apply_window_size()
+
     def show_setup_screen(self, *, auto_scan: bool = False) -> None:
         self._current_screen = "setup"
         self.main_screen.lower()
@@ -124,7 +153,7 @@ class DM40App:
         self.setup_screen.raise_click_layer()
 
     def _sync_raw_callback(self) -> None:
-        """Bez RAW konzole nevolat callback z BLE vlákna (každý poll TX+RX)."""
+        """Without RAW console, do not call callback from BLE thread (every poll TX+RX)."""
         self.ble._callbacks.on_raw_traffic = (
             self._on_raw_traffic if self.settings.get("raw_console") else None
         )
@@ -141,7 +170,7 @@ class DM40App:
         return self._client_w, h
 
     def _apply_window_size(self) -> None:
-        """Klientská oblast okna = DM40 UI (+ RAW konzole); bez prázdného pruhu pod obsahem."""
+        """Client area = DM40 UI (+ RAW console); no empty strip below content."""
         self.root.update_idletasks()
         self.root.update()
         w, h = self._client_dimensions()
@@ -189,7 +218,7 @@ class DM40App:
         return f"TX {hex_str}\n"
 
     def _is_priority_raw(self, direction: str, data: bytes) -> bool:
-        """Uživatelské TX (MODE, RANGE, HOLD, …) + krátká RX odpověď."""
+        """User TX (MODE, RANGE, HOLD, …) + short RX response."""
         if direction == "TX":
             return data not in _BACKGROUND_TX
         return direction == "RX" and time.monotonic() < self._raw_rx_burst_until
@@ -219,7 +248,7 @@ class DM40App:
             )
 
     def _queue_raw_poll_line(self, line: str) -> None:
-        """Poll: zpomalený výpis, bez fronty – drží jen nejnovější nezobrazený řádek."""
+        """Poll: throttled output, no queue – keeps only the latest unshown line."""
         if line == self._last_raw_line:
             return
         self._raw_poll_pending = line

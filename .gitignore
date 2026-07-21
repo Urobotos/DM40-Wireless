@@ -50,3 +50,4 @@ images/Photoshop/
 # Release artefakty (zip vytváří release_zip.bat)
 release/
 *.zip
+CLAUDE.md

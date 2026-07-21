@@ -1,0 +1,78 @@
+# language name: English (US)
+
+[app]
+title = "DM40 Wireless"
+
+[setup]
+title = "Connect"
+hint = "Enable Bluetooth on your DM40, then tap Search."
+status_initial = "Tap Search to find DM40A / DM40B / DM40C."
+status_scanning = "Scanning for DM40A / DM40B / DM40C…"
+status_scan_error = "Scan failed: {error}"
+status_no_device = "No DM40 found. Enable Bluetooth on the meter and try Search again."
+status_one_device = "1 device found – tap Connect."
+status_many_devices = "{count} devices found – select one, then Connect."
+status_select_first = "Select a device from the list first."
+btn_search = "Search"
+btn_connect = "Connect"
+
+[settings]
+title = "Settings"
+label_mini_app = "Mini app"
+label_always_on_top = "Always on top"
+label_raw_console = "RAW data console"
+label_language = "Language"
+import_title = "Import Language File"
+import_error_title = "Import Failed"
+import_error_msg = "Failed to import language file: {error}"
+btn_folder = "Folder"
+btn_import = "Import"
+state_on = "ON"
+state_off = "OFF"
+
+[range]
+title = "Range"
+title_no_mode = "Range — first select V / A / Ω mode"
+
+[range_titles]
+VDC = "Voltage Settings"
+VAC = "Voltage Settings"
+VDC_plus_AC = "Voltage Settings"
+ADC = "Current Settings"
+AAC = "Current Settings"
+ADC_plus_AC = "Current Settings"
+RES = "Resistor Settings"
+RES_ONLINE = "Resistor Settings"
+
+[range_subtype]
+voltage_ac = "AC"
+voltage_dc = "DC"
+voltage_ac_dc = "AC+DC"
+current_ac = "AC"
+current_dc = "DC"
+current_ac_dc = "AC+DC"
+resistor_offline = "Off line"
+resistor_online = "On line"
+
+[main]
+bt_off = "Turn ON Bluetooth"
+hold = "HOLD"
+run = "RUN"
+auto_plus = "AUTO+"
+auto = "AUTO"
+ol = "OL"
+placeholder = "---"
+
+[mode_btn]
+HZ = "Hz"
+OHM_ONLINE = "OHM\nONLINE"
+VDC_VAC = "VDC+VAC"
+ADC_AAC = "ADC+AAC"
+
+[graph]
+rel = "REL"
+
+[ble]
+console_connecting = "Looking for device {mac}..."
+console_connected = "Connected."
+console_disconnected = "Error/Disconnected: {error}. Reconnecting..."

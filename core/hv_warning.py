@@ -1,4 +1,4 @@
-"""Varování před vysokým napětím – VDC / VAC / VDC+AC."""
+"""High voltage warning – VDC / VAC / VDC+AC."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from core.parsing import Measurement
 
 VOLTAGE_KINDS = frozenset({"VDC", "VAC", "VDC+AC"})
 
-# Suché prostředí – běžný multimetr / bezpečnostní praxe (ne z manuálu DM40)
+# Dry environment – typical multimeter / safety practice (not from DM40 manual)
 HV_THRESHOLD_AC_V = 50.0
 HV_THRESHOLD_DC_V = 120.0
 
@@ -31,7 +31,7 @@ def _abs_volts(value_str: str, unit: str) -> float | None:
 
 
 def is_high_voltage_warning(m: Measurement) -> bool:
-    """True pokud měřené napětí překročí práh pro daný režim."""
+    """True if measured voltage exceeds the threshold for the given mode."""
     if m.kind not in VOLTAGE_KINDS or m.overload:
         return False
 
@@ -43,7 +43,7 @@ def is_high_voltage_warning(m: Measurement) -> bool:
         v = _abs_volts(m.value_str, m.display_unit)
         return v is not None and v >= HV_THRESHOLD_AC_V
 
-    # VDC+AC – DC složka (sec) ≥ 120 V, AC složka (third) ≥ 50 V
+    # VDC+AC – DC component (sec) ≥ 120 V, AC component (third) ≥ 50 V
     dc_v = _abs_volts(m.sec_val, m.sec_unit or "V")
     ac_v = _abs_volts(m.third_val, m.third_unit or "V")
     dc_warn = dc_v is not None and dc_v >= HV_THRESHOLD_DC_V

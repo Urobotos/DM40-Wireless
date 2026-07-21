@@ -1,4 +1,4 @@
-"""Barvy UI"""
+"""UI colors."""
 
 RGB_COLORS = {
     "background": (8, 16, 24),

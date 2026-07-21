@@ -48,8 +48,10 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 ```bat
 git clone -b develop https://github.com/Urobotos/DM40-Wireless.git
 cd DM40-Wireless
-install.bat
+.\install.bat
 ```
+
+*( `install.bat` creates `.venv` and installs dependencies from `requirements.txt` )* <br><br>
 
 On first run, copy the settings template:
 
@@ -57,13 +59,13 @@ On first run, copy the settings template:
 copy settings.example.json settings.json
 ```
 
+<br>
 Then start the app using one of these:
 
 | Method | Description |
 |--------|-------------|
-| **`DM40 Wireless.bat`** | Recommended — runs `app.pyw` without a console (uses venv if present) |
-| **`app.pyw`** | Double-click or `pythonw app.pyw` — no console |
-| **`app.py`** | PowerShell cmd: `python app.py` — with console (debugging, logs) |
+| **`DM40 Wireless.bat`** | Recommended  (Windows clickable) — runs `app.pyw` without a console |
+| **`app.py`** | PowerShell cmd: `.\.venv\Scripts\python.exe app.py` — with console (debugging, logs) |
 
 <br>
 
@@ -122,11 +124,13 @@ Connection status, meter battery, and units are shown in the top bar from live B
 
 <img width="39%" src="images/screenshot_settings.png">
 
-| Toggle | Function |
+| Setting | Function |
 |--------|----------|
 | **Mini app** | Smaller window without graph and save slots |
 | **Always on top** | Keep the window above other apps |
 | **RAW data console** | Panel below the UI showing BLE TX/RX packets (protocol debugging) |
+| **Language** 🈳 | Tap the current language ⏷ to pick from installed `.toml` files. <br> The 📁 folder icon opens the localization of custom translations in `i18n\` |
+
 
 Changes are saved to `settings.json`.
 
@@ -147,6 +151,7 @@ The file lives next to the exe or in the project root. It is not committed to gi
 | `mini_app` | Mini mode (boolean: false / true) |
 | `always_on_top` | Always on top (boolean: false / true) |
 | `raw_console` | RAW console (boolean: false / true) |
+| `language` | UI language code matching a file in `i18n/` (e.g. `"en-US"`, `"zh-CN"`; default `"en-US"`) |
 
 <br>
 
@@ -181,6 +186,7 @@ DM40-Wireless/
 ├── ble/                  # BLE worker, discovery
 ├── core/                 # Protocol, parsing, modes
 ├── gui/                  # Tkinter UI
+├── i18n/                 # Custom language .toml files
 ├── images/               # UI graphics
 ├── settings.example.json
 ├── install.bat

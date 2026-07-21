@@ -1,4 +1,4 @@
-"""Poloprůhledné debug obdélníky pro ladění layoutu displeje."""
+"""Semi-transparent debug rectangles for display layout tuning."""
 
 from __future__ import annotations
 

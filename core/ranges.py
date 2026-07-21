@@ -1,4 +1,4 @@
-"""Rozsahy (RANGE) podle aktivního režimu."""
+"""Ranges (RANGE) by active measurement mode."""
 
 from .protocol_constants import (
     FLAG_INFO,

@@ -1,1 +1,1 @@
-"""Grafické rozhraní."""
+"""Graphical user interface."""

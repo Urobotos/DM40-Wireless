@@ -1,4 +1,4 @@
-"""Načítání a mapování PNG spriteů."""
+"""PNG sprite loading and mapping."""
 
 from __future__ import annotations
 
@@ -88,13 +88,13 @@ def unit_icon_filename(unit: str) -> str | None:
 
 
 def aux_char_filename(name: str) -> str:
-    """Horní AUX displeje – menší varianty char_*.png."""
+    """Top AUX displays – smaller char_*.png variants."""
     if name.endswith("_aux.png"):
         return name
     return name.replace(".png", "_aux.png")
 
 
-# Hlavní displej – jeden PNG na režim + jednotku (images/main_unit/)
+# Main display – one PNG per mode + unit (images/main_unit/)
 MAIN_KIND_PREFIX: dict[str, str] = {
     "VDC": "dc",
     "VAC": "ac",
@@ -142,7 +142,7 @@ def _main_unit_suffix(display_unit: str) -> str | None:
 
 
 def main_unit_filename(kind: str, display_unit: str) -> str | None:
-    """Soubor v ``images/main_unit/`` pro daný režim a jednotku měření."""
+    """File in ``images/main_unit/`` for the given mode and measurement unit."""
     if kind in MAIN_UNIT_STANDALONE:
         fname = MAIN_UNIT_STANDALONE[kind]
         return fname if (MAIN_UNIT_DIR / fname).is_file() else None
@@ -163,7 +163,7 @@ def main_unit_filename(kind: str, display_unit: str) -> str | None:
 
 
 def aux_unit_icon_filename(unit: str) -> str | None:
-    """Horní AUX displeje – menší varianty jednotek (Hz_aux.png, …)."""
+    """Top AUX displays – smaller unit variants (Hz_aux.png, …)."""
     fname = unit_icon_filename(unit)
     if not fname:
         return None
@@ -241,7 +241,7 @@ class SpriteCache:
         return self.load(DISPLAY_UNIT_DIR / fname, scale, max_height=max_h)
 
     def display_unit_aux(self, fname: str, scale: float, max_h: int = 12) -> tk.PhotoImage | None:
-        """AUX sprite – preferuje *_aux.png, při absenci spadne na hlavní verzi."""
+        """AUX sprite – prefers *_aux.png, falls back to main version if missing."""
         path = DISPLAY_UNIT_DIR / fname
         if not path.is_file() and fname.endswith("_aux.png"):
             return self.display_unit(fname.replace("_aux.png", ".png"), scale, max_h=max_h)

@@ -1,4 +1,4 @@
-"""Tmavý title bar ve Windows (DWM) – aktivní i neaktivní okno."""
+"""Dark Windows title bar (DWM) – active and inactive window."""
 
 from __future__ import annotations
 
@@ -50,7 +50,7 @@ def apply_windows_titlebar(
     caption: str = DEFAULT_CAPTION,
     text: str = DEFAULT_TEXT,
 ) -> None:
-    """Tmavý title bar. Volat jen když je okno viditelné (ne iconified)."""
+    """Dark title bar. Call only when the window is visible (not iconified)."""
     if sys.platform != "win32":
         return
     try:
@@ -63,7 +63,7 @@ def apply_windows_titlebar(
     if not hwnd:
         return
 
-    # 2 = vždy tmavý (Win11); 1 = fallback na starších buildách
+    # 2 = always dark (Win11); 1 = fallback on older builds
     _set_dwm_attr(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, 2)
     _set_dwm_attr(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, 1)
     cap = _hex_to_colorref(caption)
@@ -74,7 +74,7 @@ def apply_windows_titlebar(
 
 
 def schedule_windows_titlebar(root: tk.Tk, **kwargs) -> None:
-    """Tmavý title bar po startu a znovu při změně fokusu (neaktivní okno)."""
+    """Dark title bar on startup and again on focus change (inactive window)."""
     pending: dict[str, str | None] = {"id": None}
 
     def _apply() -> None:
@@ -93,7 +93,7 @@ def schedule_windows_titlebar(root: tk.Tk, **kwargs) -> None:
 
 
 def _bottom_gap_px(root: tk.Tk, content: tk.Widget) -> int:
-    """Prázdný pruh pod obsahem (screen coords) – typicky chybně navýšené okno."""
+    """Empty strip below content (screen coords) – usually an oversized window."""
     root.update_idletasks()
     window_bottom = root.winfo_rooty() + root.winfo_height()
     content_bottom = content.winfo_rooty() + content.winfo_height()
@@ -101,7 +101,7 @@ def _bottom_gap_px(root: tk.Tk, content: tk.Widget) -> int:
 
 
 def fit_toplevel_to_client(root: tk.Tk, content: tk.Widget, client_w: int, client_h: int) -> None:
-    """Nastaví okno na přesnou velikost canvasu (Tk na Windows = bez extra chrome padding)."""
+    """Set window to exact canvas size (Tk on Windows = no extra chrome padding)."""
     root.minsize(client_w, client_h)
     root.geometry(f"{client_w}x{client_h}")
     root.update_idletasks()

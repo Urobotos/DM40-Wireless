@@ -1,4 +1,4 @@
-"""Graf s auto-škálováním, MAX/REL/MIN – vykreslení na sdíleném canvasu."""
+"""Graph with auto-scaling, MAX/REL/MIN – rendered on shared canvas."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ import tkinter as tk
 
 from core.controller import COMMANDS
 from core.graph_format import axis_mul_for_unit, format_graph_scale_label, format_graph_value
+from core.i18n import t
 from core.parsing import Measurement
 from gui import layout as L
 from gui.assets import CLICK_HOTSPOT_TAG
@@ -119,7 +120,7 @@ class GraphPanel:
         rcx = self._s(rx + rw // 2)
         rcy = self._s(ry + rh // 2)
         self._sidebar_ids["rel"] = self.canvas.create_text(
-            rcx, rcy, text="REL", anchor="center", font=rel_font,
+            rcx, rcy, text=t("graph.rel"), anchor="center", font=rel_font,
             fill=rgb_hex("text_primary"), tags=(self.TAG, "graph_rel_text"),
         )
         self._place_rel_bg(False)
@@ -256,6 +257,12 @@ class GraphPanel:
 
         self.canvas.tag_bind(tag, "<ButtonPress-1>", on_press)
         self.canvas.tag_bind(tag, "<ButtonRelease-1>", on_release)
+
+    def refresh_rel_text(self) -> None:
+        """Refresh REL button text (called on language change)."""
+        rid = self._sidebar_ids.get("rel")
+        if rid:
+            self.canvas.itemconfig(rid, text=t("graph.rel"))
 
     def clear(self) -> None:
         self._buf.clear()

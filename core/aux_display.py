@@ -1,4 +1,4 @@
-"""Horní úzké displeje (levý / pravý) podle režimu měření."""
+"""Top narrow displays (left / right) by measurement mode."""
 
 from __future__ import annotations
 
@@ -56,7 +56,7 @@ def _combined_aux(
 
 
 def build_aux_panels(m: Measurement) -> tuple[AuxPanel, AuxPanel]:
-    """Vrátí (levý, pravý) horní aux displej pro dané měření."""
+    """Return (left, right) top aux display for the given measurement."""
     kind = m.kind
     empty = AuxPanel()
 

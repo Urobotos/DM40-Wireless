@@ -1,4 +1,4 @@
-"""Načtení / uložení settings.json."""
+"""Load / save settings.json."""
 
 import json
 from copy import deepcopy
@@ -17,11 +17,12 @@ DEFAULTS = {
     "mini_app": False,
     "always_on_top": False,
     "raw_console": False,
+    "language": "en-US",
 }
 
 
 def apply_saved_model(settings: dict) -> None:
-    """Načte uložený model multimetru (RANGE counts) před připojením."""
+    """Loads the saved multimeter model (RANGE counts) before connecting."""
     name = (settings.get("model_name") or "").strip()
     counts = int(settings.get("device_counts") or 0)
     if name and counts > 0:
@@ -29,7 +30,7 @@ def apply_saved_model(settings: dict) -> None:
 
 
 def persist_device(settings: dict, *, mac: str, model_name: str, device_counts: int) -> bool:
-    """Uloží MAC a model do settings; vrátí True při změně."""
+    """Saves MAC and model to settings; returns True on change."""
     changed = False
     mac = mac.strip()
     if mac and settings.get("target_mac") != mac:
@@ -56,8 +57,13 @@ def load_settings() -> dict:
     return deepcopy(DEFAULTS)
 
 
-def save_settings(settings: dict) -> None:
+def save_settings(settings: dict) -> bool:
+    """Atomically write settings.json (temp file then replace, avoids corruption)."""
+    import tempfile
+    tmp = SETTINGS_PATH.with_suffix(".tmp")
     try:
-        SETTINGS_PATH.write_text(json.dumps(settings, indent=2), encoding="utf-8")
+        tmp.write_text(json.dumps(settings, indent=2), encoding="utf-8")
+        tmp.replace(SETTINGS_PATH)
+        return True
     except OSError:
-        pass
+        return False

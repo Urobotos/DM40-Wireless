@@ -1,4 +1,4 @@
-"""Kontrola, zda je na Windows zapnuté Bluetooth (adaptér v PnP stavu OK)."""
+"""Check whether Bluetooth is enabled on Windows (adapter PnP status OK)."""
 
 from __future__ import annotations
 
@@ -40,7 +40,7 @@ def exception_indicates_bt_off(exc: BaseException) -> bool:
 
 
 def is_bluetooth_enabled() -> bool | None:
-    """True = zapnuto, False = vypnuto, None = nelze zjistit (jiné OS / chyba)."""
+    """True = on, False = off, None = unknown (other OS / error)."""
     if sys.platform != "win32":
         return None
     try:

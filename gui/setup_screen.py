@@ -1,4 +1,4 @@
-"""Connect (cold run) – výběr DM40 v hlavním okně aplikace."""
+"""Connect (cold run) – DM40 device selection in the main app window."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ import tkinter as tk
 
 from ble.discovery import DM40Device, scan_dm40_devices_sync
 from core.config import SCREEN_HEIGHT, SCREEN_WIDTH
+from core.i18n import t
 from gui import layout as L
 from gui import setup_layout as SL
 from gui.assets import bind_clickable, raise_click_hotspots
@@ -54,13 +55,13 @@ class SetupScreen(tk.Frame):
         )
         font = ("sans-serif", self._s(SL.SETUP_TITLE_FONT), "bold")
         self.canvas.create_text(
-            self._s(L.SCREEN_W // 2), self._s(SL.SETUP_TITLE_Y), text="Connect",
+            self._s(L.SCREEN_W // 2), self._s(SL.SETUP_TITLE_Y), text=t("setup.title"),
             fill=rgb_hex("text_primary"), anchor="center", font=font, tags="setup_chrome",
         )
         hint_font = ("sans-serif", self._s(SL.SETUP_HINT_FONT), "normal")
         self.canvas.create_text(
             self._s(L.SCREEN_W // 2), self._s(SL.SETUP_HINT_Y),
-            text="Enable Bluetooth on your DM40, then tap Search.",
+            text=t("setup.hint"),
             fill=rgb_hex("text_secondary"), anchor="center", font=hint_font, tags="setup_chrome",
         )
         status_font = ("sans-serif", self._s(SL.SETUP_STATUS_FONT), "normal")
@@ -68,7 +69,7 @@ class SetupScreen(tk.Frame):
             self._s(L.SCREEN_W // 2), self._s(SL.SETUP_STATUS_Y), text="",
             fill=rgb_hex("text_primary"), anchor="center", font=status_font, tags="setup_chrome",
         )
-        self._set_status("Tap Search to find DM40A / DM40B / DM40C.")
+        self._set_status(t("setup.status_initial"))
 
     def _set_status(self, text: str) -> None:
         if self._status_id is not None:
@@ -124,7 +125,7 @@ class SetupScreen(tk.Frame):
 
     def _draw_bottom_buttons(self) -> None:
         font = ("sans-serif", self._s(13), "bold")
-        for label, (x, y, w, h) in zip(SL.SETUP_BTN_LABELS, SL.setup_button_slots()):
+        for i, (label, (x, y, w, h)) in enumerate(zip(SL.setup_btn_labels(), SL.setup_button_slots())):
             rx, ry, rw, rh = self._s(x), self._s(y), self._s(w), self._s(h)
             radius = self._s(L.MODE_BTN_RADIUS)
             photo = self.sprites.rounded_button("buttons", rw, rh, radius)
@@ -137,10 +138,29 @@ class SetupScreen(tk.Frame):
                 fill=rgb_hex("text_primary"), anchor="center", font=font,
                 tags=("setup_btn", f"setup_btn_txt_{label}"),
             )
-            cmd = self.start_scan if label == "Search" else self._on_connect
+            cmd = self.start_scan if i == 0 else self._on_connect
             bind_clickable(
                 self.canvas, rx, ry, rw, rh, cmd, tag=f"setup_hit_{label}",
             )
+
+    def refresh_all(self) -> None:
+        """Rebuild all translatable text; keep device list and scan state."""
+        self.canvas.delete("setup_chrome")
+        self.canvas.delete("setup_btn")
+        self._sprite_ids.clear()
+        self._draw_chrome()
+        self._draw_bottom_buttons()
+        if self._scanning:
+            self._set_status(t("setup.status_scanning"))
+        elif self._devices:
+            n = len(self._devices)
+            if n == 1:
+                self._set_status(t("setup.status_one_device"))
+            else:
+                self._set_status(t("setup.status_many_devices", count=n))
+        else:
+            self._set_status(t("setup.status_initial"))
+        self._rebuild_device_list()
 
     def on_show(self, *, auto_scan: bool = False) -> None:
         self._show_bt_icon()
@@ -157,7 +177,7 @@ class SetupScreen(tk.Frame):
         self._devices = []
         self._selected = -1
         self.canvas.delete("setup_row")
-        self._set_status("Scanning for DM40A / DM40B / DM40C…")
+        self._set_status(t("setup.status_scanning"))
         self._start_bt_pulse()
         threading.Thread(target=self._scan_worker, daemon=True).start()
         self._poll_scan_result()
@@ -188,13 +208,13 @@ class SetupScreen(tk.Frame):
         self._selected = 0 if devices else -1
         self._rebuild_device_list()
         if error:
-            self._set_status(f"Scan failed: {error}")
+            self._set_status(t("setup.status_scan_error", error=error))
         elif not devices:
-            self._set_status("No DM40 found. Enable Bluetooth on the meter and try Search again.")
+            self._set_status(t("setup.status_no_device"))
         elif len(devices) == 1:
-            self._set_status("1 device found – tap Connect.")
+            self._set_status(t("setup.status_one_device"))
         else:
-            self._set_status(f"{len(devices)} devices found – select one, then Connect.")
+            self._set_status(t("setup.status_many_devices", count=len(devices)))
 
     def _rebuild_device_list(self) -> None:
         self.canvas.delete("setup_row")
@@ -240,6 +260,6 @@ class SetupScreen(tk.Frame):
 
     def _on_connect(self) -> None:
         if self._selected < 0 or self._selected >= len(self._devices):
-            self._set_status("Select a device from the list first.")
+            self._set_status(t("setup.status_select_first"))
             return
         self.app.complete_device_setup(self._devices[self._selected])

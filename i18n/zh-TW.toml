@@ -1,0 +1,78 @@
+# language name: 繁體中文 (zh-TW)
+
+[app]
+title = "DM40 Wireless"
+
+[setup]
+title = "連線"
+hint = "在您的DM40上啟用藍牙，然後點擊搜尋。"
+status_initial = "點擊搜尋以查找 DM40A / DM40B / DM40C。"
+status_scanning = "正在搜尋 DM40A / DM40B / DM40C…"
+status_scan_error = "搜尋失敗：{error}"
+status_no_device = "未找到 DM40。請開啟萬用錶藍牙後再次搜尋。"
+status_one_device = "發現 1 台裝置 – 點擊連線。"
+status_many_devices = "發現 {count} 台裝置 – 選擇一台，然後連線。"
+status_select_first = "請先從清單中選擇一台裝置。"
+btn_search = "搜尋"
+btn_connect = "連線"
+
+[settings]
+title = "設定"
+label_mini_app = "迷你視窗"
+label_always_on_top = "視窗置頂"
+label_raw_console = "RAW 資料控制台"
+label_language = "語言"
+import_title = "匯入語言檔案"
+import_error_title = "匯入失敗"
+import_error_msg = "匯入語言檔案失敗：{error}"
+btn_folder = "資料夾"
+btn_import = "匯入"
+state_on = "開"
+state_off = "關"
+
+[range]
+title = "檔位"
+title_no_mode = "檔位 — 請先選擇 V / A / Ω 模式"
+
+[range_titles]
+VDC = "電壓設定"
+VAC = "電壓設定"
+VDC_plus_AC = "電壓設定"
+ADC = "電流設定"
+AAC = "電流設定"
+ADC_plus_AC = "電流設定"
+RES = "電阻設定"
+RES_ONLINE = "電阻設定"
+
+[range_subtype]
+voltage_ac = "AC"
+voltage_dc = "DC"
+voltage_ac_dc = "AC+DC"
+current_ac = "AC"
+current_dc = "DC"
+current_ac_dc = "AC+DC"
+resistor_offline = "離線"
+resistor_online = "線上"
+
+[main]
+bt_off = "請開啟藍牙"
+hold = "保持"
+run = "執行"
+auto_plus = "AUTO+"
+auto = "AUTO"
+ol = "超檔位"
+placeholder = "---"
+
+[mode_btn]
+HZ = "Hz"
+OHM_ONLINE = "OHM\n線上"
+VDC_VAC = "VDC+VAC"
+ADC_AAC = "ADC+AAC"
+
+[graph]
+rel = "相對值"
+
+[ble]
+console_connecting = "正在查找裝置 {mac}..."
+console_connected = "已連線。"
+console_disconnected = "錯誤/已斷線: {error}。正在重連..."

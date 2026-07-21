@@ -1,0 +1,78 @@
+# language name: Deutsch (de-DE)
+
+[app]
+title = "DM40 Wireless"
+
+[setup]
+title = "Verbinden"
+hint = "Bluetooth am DM40 aktivieren, dann Suchen tippen."
+status_initial = "Tippen Sie auf Suchen für DM40A / DM40B / DM40C."
+status_scanning = "Suche DM40A / DM40B / DM40C…"
+status_scan_error = "Suche fehlgeschlagen: {error}"
+status_no_device = "Kein DM40 gefunden. Bluetooth am Multimeter aktivieren und erneut suchen."
+status_one_device = "1 Gerät gefunden – Verbinden tippen."
+status_many_devices = "{count} Geräte gefunden – eines wählen, dann Verbinden."
+status_select_first = "Bitte zuerst ein Gerät aus der Liste wählen."
+btn_search = "Suchen"
+btn_connect = "Verbinden"
+
+[settings]
+title = "Einstellungen"
+label_mini_app = "Mini-App"
+label_always_on_top = "Immer im Vordergrund"
+label_raw_console = "RAW-Datenkonsole"
+label_language = "Sprache"
+import_title = "Sprachdatei importieren"
+import_error_title = "Import fehlgeschlagen"
+import_error_msg = "Sprachdatei konnte nicht importiert werden: {error}"
+btn_folder = "Ordner"
+btn_import = "Import"
+state_on = "EIN"
+state_off = "AUS"
+
+[range]
+title = "Messbereich"
+title_no_mode = "Messbereich — zuerst V / A / Ω Modus wählen"
+
+[range_titles]
+VDC = "Spannungseinstellungen"
+VAC = "Spannungseinstellungen"
+VDC_plus_AC = "Spannungseinstellungen"
+ADC = "Stromeinstellungen"
+AAC = "Stromeinstellungen"
+ADC_plus_AC = "Stromeinstellungen"
+RES = "Widerstandseinstellungen"
+RES_ONLINE = "Widerstandseinstellungen"
+
+[range_subtype]
+voltage_ac = "AC"
+voltage_dc = "DC"
+voltage_ac_dc = "AC+DC"
+current_ac = "AC"
+current_dc = "DC"
+current_ac_dc = "AC+DC"
+resistor_offline = "Off line"
+resistor_online = "On line"
+
+[main]
+bt_off = "Bluetooth einschalten"
+hold = "HOLD"
+run = "RUN"
+auto_plus = "AUTO+"
+auto = "AUTO"
+ol = "OL"
+placeholder = "---"
+
+[mode_btn]
+HZ = "Hz"
+OHM_ONLINE = "OHM\nONLINE"
+VDC_VAC = "VDC+VAC"
+ADC_AAC = "ADC+AAC"
+
+[graph]
+rel = "REL"
+
+[ble]
+console_connecting = "Suche Gerät {mac}..."
+console_connected = "Verbunden."
+console_disconnected = "Fehler/Getrennt: {error}. Verbinde erneut..."

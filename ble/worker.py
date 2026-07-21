@@ -1,4 +1,4 @@
-"""Asyncio BLE worker – běží na pozadí, volá callbacky do GUI přes root.after."""
+"""Asyncio BLE worker – runs in background, invokes GUI callbacks via root.after."""
 
 import asyncio
 import threading
@@ -108,13 +108,14 @@ class BleWorker:
                 await asyncio.sleep(2.0)
                 continue
 
+            from core.i18n import t
             try:
-                print(f"Hledam zarizeni {self._target_mac}...")
+                print(t("ble.console_connecting", mac=self._target_mac))
                 self._callbacks.on_connecting()
                 async with BleakClient(self._target_mac, timeout=20.0) as client:
                     self._client = client
                     self._loop = asyncio.get_running_loop()
-                    print("Pripojeno.")
+                    print(t("ble.console_connected"))
                     if guess_model_from_ble_name(client.name or ""):
                         self._callbacks.on_model()
 
@@ -140,7 +141,7 @@ class BleWorker:
                                 pass
                     await asyncio.sleep(0.01)
             except Exception as exc:
-                print(f"Chyba/Odpojeno: {exc}. Pripojuji znova...")
+                print(t("ble.console_disconnected", error=exc))
                 self._client = None
                 self._ble_lock = None
                 if exception_indicates_bt_off(exc):

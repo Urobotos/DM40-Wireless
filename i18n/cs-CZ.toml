@@ -1,0 +1,78 @@
+# language name: Čeština (cs-CZ)
+
+[app]
+title = "DM40 Wireless"
+
+[setup]
+title = "Připojení"
+hint = "Zapněte Bluetooth na DM40 a klepněte na Hledat."
+status_initial = "Klepněte na Hledat pro DM40A / DM40B / DM40C."
+status_scanning = "Hledám DM40A / DM40B / DM40C…"
+status_scan_error = "Hledání selhalo: {error}"
+status_no_device = "DM40 nenalezen. Zapněte Bluetooth na multimetru a zkuste Hledat znovu."
+status_one_device = "Nalezeno 1 zařízení – klepněte na Připojit."
+status_many_devices = "Nalezeno {count} zařízení – vyberte jedno a klepněte na Připojit."
+status_select_first = "Nejprve vyberte zařízení ze seznamu."
+btn_search = "Hledat"
+btn_connect = "Připojit"
+
+[settings]
+title = "Nastavení"
+label_mini_app = "Mini aplikace"
+label_always_on_top = "Vždy navrchu"
+label_raw_console = "Konzole RAW dat"
+label_language = "Jazyk"
+import_title = "Import jazykového souboru"
+import_error_title = "Import selhal"
+import_error_msg = "Import jazykového souboru selhal: {error}"
+btn_folder = "Složka"
+btn_import = "Import"
+state_on = "ZAP"
+state_off = "VYP"
+
+[range]
+title = "Rozsah"
+title_no_mode = "Rozsah — nejprve zvolte režim V / A / Ω"
+
+[range_titles]
+VDC = "Nastavení napětí"
+VAC = "Nastavení napětí"
+VDC_plus_AC = "Nastavení napětí"
+ADC = "Nastavení proudu"
+AAC = "Nastavení proudu"
+ADC_plus_AC = "Nastavení proudu"
+RES = "Nastavení odporu"
+RES_ONLINE = "Nastavení odporu"
+
+[range_subtype]
+voltage_ac = "AC"
+voltage_dc = "DC"
+voltage_ac_dc = "AC+DC"
+current_ac = "AC"
+current_dc = "DC"
+current_ac_dc = "AC+DC"
+resistor_offline = "Off line"
+resistor_online = "On line"
+
+[main]
+bt_off = "Zapněte Bluetooth"
+hold = "HOLD"
+run = "RUN"
+auto_plus = "AUTO+"
+auto = "AUTO"
+ol = "OL"
+placeholder = "---"
+
+[mode_btn]
+HZ = "Hz"
+OHM_ONLINE = "OHM\nONLINE"
+VDC_VAC = "VDC+VAC"
+ADC_AAC = "ADC+AAC"
+
+[graph]
+rel = "REL"
+
+[ble]
+console_connecting = "Hledám zařízení {mac}..."
+console_connected = "Připojeno."
+console_disconnected = "Chyba/Odpojeno: {error}. Připojuji znovu..."

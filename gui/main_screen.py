@@ -1,9 +1,10 @@
-"""Hlavní obrazovka multimetru – sprite GUI bez celoplošného PNG pozadí."""
+"""Main multimeter screen – sprite GUI without full-screen PNG background."""
 
 import tkinter as tk
 
 from core.aux_display import AuxPanel, build_aux_panels
 from core.config import SCREEN_HEIGHT, SCREEN_WIDTH
+from core.i18n import t
 from core.controller import COMMANDS
 from gui.graph_panel import GraphPanel
 from core.display_format import combined_main_value_str, split_main_value
@@ -17,9 +18,6 @@ from gui.assets import CLICK_HOTSPOT_TAG, bind_clickable, raise_click_hotspots
 from gui.display_debug import clear_display_debug, draw_debug_rect
 from gui.sprites import SpriteCache, main_unit_filename
 from gui.theme import rgb_hex
-
-BT_OFF_MESSAGE = "Turn ON Bluetooth"
-
 
 class MainScreen(tk.Frame):
     def __init__(self, master, app, scale: float) -> None:
@@ -77,7 +75,7 @@ class MainScreen(tk.Frame):
         self.canvas.tag_raise("graph_hit_rel")
 
     def _raise_visual_layers(self) -> None:
-        """Graf pod MODE řadou; klikací zóny se řeší v raise_click_layer."""
+        """Graph below MODE row; click zones handled in raise_click_layer."""
         self.canvas.tag_lower("graph")
         self.canvas.tag_raise("mode_btn")
 
@@ -228,7 +226,7 @@ class MainScreen(tk.Frame):
             self._hide_sprite("hv_warn")
 
     def _layout_main_value(self, raw: str, decimals: int = 2) -> None:
-        if raw == BT_OFF_MESSAGE:
+        if raw == t("main.bt_off"):
             layout = L.main_value_layout()
             rx, _, rw, _ = layout["row"]
             self._set_canvas_text("value_sign", "")
@@ -350,7 +348,7 @@ class MainScreen(tk.Frame):
         self._stop_ble_pulse()
         self._ble_state = "disconnected"
         self._hide_sprite("bt")
-        self._layout_main_value(BT_OFF_MESSAGE)
+        self._layout_main_value(t("main.bt_off"))
         self._update_hv_warning(False)
         self._clear_aux_displays()
         self._clear_unit_sprites()
@@ -674,12 +672,20 @@ class MainScreen(tk.Frame):
         self.canvas.tag_bind("hit_main_save", "<ButtonPress-1>", on_press)
         self.canvas.tag_bind("hit_main_save", "<ButtonRelease-1>", on_release)
 
+    def refresh_all(self) -> None:
+        """Rebuild all translatable text (called on language change)."""
+        self.refresh_mode_buttons(self.app.mode_state)
+        self._graph.refresh_rel_text()
+        if self._bt_off_display:
+            self._layout_main_value(t("main.bt_off"))
+        self.raise_click_layer()
+
     def release_hold_freeze(self) -> None:
-        """Uvolní zmrazení displeje (např. po přepnutí MODE → RUN na přístroji)."""
+        """Release display freeze (e.g. after MODE → RUN on the device)."""
         self._display_frozen = False
 
     def _render_measurement(self, m, rng_label: str) -> None:
-        """Vykreslí měření na displej (hlavní číslice, aux, jednotky, HV)."""
+        """Render measurement on display (main digits, aux, units, HV)."""
         main_text = combined_main_value_str(
             m.kind, m.value_str, m.decimals,
             m.sec_val, m.third_val,

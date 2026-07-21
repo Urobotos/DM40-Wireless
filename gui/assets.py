@@ -1,4 +1,4 @@
-"""Načtení PNG a klikací oblasti na canvasu."""
+"""PNG loading and canvas click areas."""
 
 from pathlib import Path
 import tkinter as tk
@@ -34,7 +34,7 @@ def bind_clickable(
     debug: bool = False,
     debug_color: str = "#4080ff",
 ) -> int:
-    """Průhledná oblast; musí být nad sprity (raise_click_hotspots)."""
+    """Transparent hit area; must sit above sprites (raise_click_hotspots)."""
     hit_tag = tag or f"hit_{x}_{y}"
     rid = canvas.create_rectangle(
         x, y, x + w, y + h,
@@ -53,5 +53,5 @@ def bind_clickable(
 
 
 def raise_click_hotspots(canvas: tk.Canvas) -> None:
-    """Klikací vrstva navrch – PNG s průhledností jinak kliky spolkne."""
+    """Raise click layer on top – transparent PNG otherwise swallows clicks."""
     canvas.tag_raise(CLICK_HOTSPOT_TAG)

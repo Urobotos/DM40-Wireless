@@ -1,4 +1,4 @@
-"""RAW BLE konzole pod hlavní obrazovkou."""
+"""RAW BLE console below the main screen."""
 
 from __future__ import annotations
 
@@ -49,7 +49,7 @@ class RawConsole(tk.Frame):
             widget.bind("<Button-5>", self._on_wheel, add=True)
 
     def _create_scrollbar(self, master: tk.Misc) -> tk.Scrollbar:
-        """Klasický tk posuvník – na Windows respektuje barvy (ttk používá OS motiv)."""
+        """Classic tk scrollbar – respects colors on Windows (ttk uses OS theme)."""
         return tk.Scrollbar(
             master,
             orient="vertical",

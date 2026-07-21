@@ -1,4 +1,4 @@
-"""Hex příkazy pro režimy a doplňkové funkce."""
+"""Hex commands for modes and auxiliary functions."""
 
 from .config import CMD_DISCOVERY, CMD_POLL
 

@@ -1,1 +1,1 @@
-"""Jádro aplikace DM40 Wireless."""
+"""DM40 Wireless application core."""

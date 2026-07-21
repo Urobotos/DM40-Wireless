@@ -3,18 +3,23 @@ cd /d "%~dp0"
 echo Building DM40 Wireless (PyInstaller)...
 echo.
 
-where python >nul 2>&1
-if errorlevel 1 (
-    echo Python not found in PATH.
+if not exist .venv\Scripts\python.exe (
+    echo Virtual environment not found. Run install.bat first.
     pause
     exit /b 1
 )
 
-python -m pip install --upgrade pyinstaller
+set "PY=.venv\Scripts\python.exe"
+
+REM Close running app — otherwise build\ or dist\ may be locked (WinError 5)
+taskkill /IM "DM40 Wireless.exe" /F >nul 2>&1
+timeout /t 1 /nobreak >nul
+
+"%PY%" -m pip install --upgrade pyinstaller
 if errorlevel 1 exit /b 1
 
 REM --onedir: spolehlivejsi pro Bleak/BLE nez --onefile (doporuceno)
-python -m PyInstaller --noconfirm --clean ^
+"%PY%" -m PyInstaller --noconfirm --clean ^
   --name "DM40 Wireless" ^
   --windowed ^
   --onedir ^
@@ -30,6 +35,12 @@ if errorlevel 1 (
 
 if not exist "dist\DM40 Wireless\settings.json" (
   copy /Y settings.example.json "dist\DM40 Wireless\settings.json" >nul 2>&1
+)
+
+REM Copy i18n language files for distribution
+if exist "i18n" (
+  if not exist "dist\DM40 Wireless\i18n" mkdir "dist\DM40 Wireless\i18n"
+  xcopy /Y /E "i18n\*.toml" "dist\DM40 Wireless\i18n\" >nul 2>&1
 )
 
 echo.

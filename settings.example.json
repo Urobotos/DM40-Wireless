@@ -8,5 +8,6 @@
   "debug_display_layout": false,
   "mini_app": false,
   "always_on_top": false,
-  "raw_console": false
+  "raw_console": false,
+  "language": "en-US"
 }

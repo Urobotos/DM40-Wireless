@@ -1,4 +1,4 @@
-"""5× save slot pod hlavními číslicemi – ukládání klikem na měření."""
+"""Five save slots below main digits – save a reading by clicking the measurement."""
 
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ class SaveSlotManager:
 
 
 def format_save_reading(m: Measurement) -> tuple[str, str | None]:
-    """Vrátí (text, unit_png) pro uložení do save slotu."""
+    """Return (text, unit_png) for saving to a save slot."""
     main_text = combined_main_value_str(
         m.kind, m.value_str, m.decimals,
         m.sec_val, m.third_val,

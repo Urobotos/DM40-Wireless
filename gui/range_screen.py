@@ -1,4 +1,4 @@
-"""RANGE obrazovka – canvas GUI podle DM40 multimetru."""
+"""RANGE screen – canvas GUI matching the DM40 multimeter."""
 
 from __future__ import annotations
 
@@ -6,9 +6,10 @@ import tkinter as tk
 
 from core.config import SCREEN_HEIGHT, SCREEN_WIDTH
 from core.controller import COMMANDS
+from core.i18n import t
 from core.modes import KIND_TO_CMD
 from core.parsing import MODEL
-from core.protocol_constants import RANGE_SCREEN_TITLES
+from core.protocol_constants import range_screen_title
 from core.ranges import RANGE_CAPABLE_KINDS, kind_from_mode_cmd_key, ranges_for_kind
 from gui import layout as L
 from gui import range_layout as RL
@@ -50,7 +51,7 @@ class RangeScreen(tk.Frame):
         )
         font = ("sans-serif", self._s(RL.RANGE_TITLE_FONT), "bold")
         self._title_id = self.canvas.create_text(
-            self._s(L.SCREEN_W // 2), self._s(RL.RANGE_TITLE_Y), text="Range",
+            self._s(L.SCREEN_W // 2), self._s(RL.RANGE_TITLE_Y), text=t("range.title"),
             fill=rgb_hex("text_primary"), anchor="center", font=font, tags="range_chrome",
         )
         self._place_back_icon()
@@ -82,14 +83,14 @@ class RangeScreen(tk.Frame):
         if not kind or kind not in RANGE_CAPABLE_KINDS:
             if self._title_id is not None:
                 self.canvas.itemconfig(
-                    self._title_id, text="Range — first select V / A / Ω mode",
+                    self._title_id, text=t("range.title_no_mode"),
                 )
             self.raise_click_layer()
             return
 
         if self._title_id is not None:
             self.canvas.itemconfig(
-                self._title_id, text=RANGE_SCREEN_TITLES.get(kind, f"Range — {kind}"),
+                self._title_id, text=range_screen_title(kind),
             )
 
         items = ranges_for_kind(kind, MODEL.model_name)
@@ -102,7 +103,7 @@ class RangeScreen(tk.Frame):
         group = RL.subtype_group(kind)
         if group:
             sy = RL.subtype_row_y(len(items), start_y=start_y)
-            options = RL.SUBTYPE_ROW_LABELS[group]
+            options = RL.subtype_row_labels()[group]
             slots = RL.range_button_slots(len(options), start_y=sy)
             for (text, cmd_key), (x, y, w, h) in zip(options, slots):
                 active = KIND_TO_CMD.get(kind) == cmd_key
