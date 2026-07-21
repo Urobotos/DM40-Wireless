@@ -186,6 +186,7 @@ DM40-Wireless/
 ├── ble/                  # BLE worker, discovery
 ├── core/                 # Protocol, parsing, modes
 ├── gui/                  # Tkinter UI
+├── i18n/                 # Custom language `.toml` files
 ├── images/               # UI graphics
 ├── settings.example.json
 ├── install.bat
