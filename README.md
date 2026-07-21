@@ -64,7 +64,7 @@ Then start the app using one of these:
 
 | Method | Description |
 |--------|-------------|
-| **`DM40 Wireless.bat`** | Recommended — runs `app.pyw` without a console (uses venv if present) |
+| **`DM40 Wireless.bat`** | Recommended  (Windows clickable) — runs `app.pyw` without a console (uses venv if present) |
 | **`app.py`** | PowerShell cmd: `.\.venv\Scripts\python.exe app.py` — with console (debugging, logs) |
 
 <br>
