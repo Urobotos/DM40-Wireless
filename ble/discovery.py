@@ -1,4 +1,4 @@
-"""Vyhledání DM40 multimetrů přes BLE (Bleak)."""
+"""Discover DM40 multimeters over BLE (Bleak)."""
 
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ def model_from_ble_name(name: str) -> tuple[str, int] | None:
 
 
 async def scan_dm40_devices(*, timeout: float = 10.0) -> list[DM40Device]:
-    """Vrátí nalezená DM40A/B/C zařízení (podle BLE jména)."""
+    """Return discovered DM40A/B/C devices (matched by BLE name)."""
     found: dict[str, DM40Device] = {}
     try:
         discovered = await BleakScanner.discover(timeout=timeout, return_adv=True)

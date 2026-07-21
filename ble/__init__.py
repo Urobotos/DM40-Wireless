@@ -1,4 +1,4 @@
-"""BLE vrstva (bleak)."""
+"""BLE layer (bleak)."""
 
 from .worker import BleWorker
 

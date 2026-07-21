@@ -1,4 +1,4 @@
-"""Asyncio BLE worker – běží na pozadí, volá callbacky do GUI přes root.after."""
+"""Asyncio BLE worker – runs in background, invokes GUI callbacks via root.after."""
 
 import asyncio
 import threading
