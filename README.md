@@ -129,7 +129,7 @@ Connection status, meter battery, and units are shown in the top bar from live B
 | **Mini app** | Smaller window without graph and save slots |
 | **Always on top** | Keep the window above other apps |
 | **RAW data console** | Panel below the UI showing BLE TX/RX packets (protocol debugging) |
-| **Language** 🈳 | Tap the current language to pick from installed `.toml` files. <br> The 📁 folder icon opens the localization of custom translations in `i18n\` |
+| **Language** 🈳 | Tap the current language ⏷ to pick from installed `.toml` files. <br> The 📁 folder icon opens the localization of custom translations in `i18n\` |
 
 
 Changes are saved to `settings.json`.
