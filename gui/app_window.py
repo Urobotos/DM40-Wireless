@@ -119,7 +119,7 @@ class DM40App:
         self.show_main_screen()
 
     def reload_language(self, lang_code: str) -> None:
-        """Switch language and refresh all visible UI; update settings.json."""
+        """Switch language, refresh all screens, and update settings.json."""
         i18n = get_i18n()
         if not i18n.load_language(lang_code):
             return
@@ -131,19 +131,15 @@ class DM40App:
             pass
         # Refresh UI
         self.root.title(t("app.title"))
-        self._refresh_visible_screen()
+        self._refresh_all_screens_i18n()
 
-    def _refresh_visible_screen(self) -> None:
-        """Rebuild visible UI for the current screen to reflect the new language."""
-        if self._current_screen == "main":
-            self.main_screen.refresh_all()
-        elif self._current_screen == "range":
-            kind = self.mode_state.get_active_kind()
-            self.range_screen.rebuild_for_kind(kind, self._last_range_flag)
-        elif self._current_screen == "settings":
-            self.settings_screen.rebuild()
-        elif self._current_screen == "setup":
-            self.setup_screen.refresh_all()
+    def _refresh_all_screens_i18n(self) -> None:
+        """Refresh translatable strings on every screen (language is switched from Settings)."""
+        self.main_screen.refresh_all()
+        kind = self.mode_state.get_active_kind()
+        self.range_screen.rebuild_for_kind(kind, self._last_range_flag)
+        self.settings_screen.rebuild()
+        self.setup_screen.refresh_all()
         self._apply_window_size()
 
     def show_setup_screen(self, *, auto_scan: bool = False) -> None:

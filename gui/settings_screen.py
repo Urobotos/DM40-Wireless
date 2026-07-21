@@ -75,6 +75,8 @@ class SettingsScreen(tk.Frame):
 
     def rebuild(self) -> None:
         self._close_lang_popup()
+        if self._title_id is not None:
+            self.canvas.itemconfig(self._title_id, text=t("settings.title"))
         self.canvas.delete("settings_row")
         label_font = ("sans-serif", self._s(SL.SETTINGS_LABEL_FONT), "normal")
         state_font = ("sans-serif", self._s(SL.SETTINGS_STATE_FONT), "bold")
@@ -178,7 +180,6 @@ class SettingsScreen(tk.Frame):
         if lang_code == current:
             return
         self.app.reload_language(lang_code)
-        self.rebuild()
 
     def _toggle_lang_popup(self, rx: int, ry: int, rw: int, rh: int) -> None:
         if self._lang_popup is not None:
