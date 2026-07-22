@@ -10,8 +10,8 @@ TOP_BAR_H = 35
 TOP_BAR_BG_Y = 0
 
 # Top bar – text positions (anchor "w", draw y = [1] + 10 in main_screen.py)
-RANGE_IMG = (5, 6)
-HOLD_IMG = (100, 6)
+RANGE_IMG = (5, 9)
+HOLD_IMG = (100, 9)
 
 # Top bar click areas – (x, y, w, h); HOLD_HIT follows HOLD_IMG automatically
 _TOP_HIT_X = 4
