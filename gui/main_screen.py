@@ -106,6 +106,12 @@ class MainScreen(tk.Frame):
             self.canvas.delete(self._sprite_ids[key])
         self._sprite_ids[key] = self.canvas.create_image(x, y, anchor=anchor, image=photo, tags="sprite")
 
+    def _top_bar_status_font(self) -> tuple[str, int, str]:
+        return ("sans-serif", self._s(L.TOP_BAR_STATUS_FONT), "")
+
+    def _top_bar_status_y(self, img_y: float) -> int:
+        return self._s(img_y + L.TOP_BAR_STATUS_Y_OFFSET)
+
     def _draw_chrome(self) -> None:
         s = self.scale
         self.canvas.create_rectangle(
@@ -151,13 +157,13 @@ class MainScreen(tk.Frame):
             self._s(digits_x + digits_w // 2), cy, text="---",
             fill=rgb_hex("orange_main"), anchor="center", font=font_main,
         )
-        top_font = ("sans-serif", self._s(16), "")
+        top_font = self._top_bar_status_font()
         self._text_ids["range_text"] = self.canvas.create_text(
-            self._s(L.RANGE_IMG[0]), self._s(L.RANGE_IMG[1] + 10), text="AUTO+",
+            self._s(L.RANGE_IMG[0]), self._top_bar_status_y(L.RANGE_IMG[1]), text="AUTO+",
             fill=rgb_hex("text_primary"), anchor="w", font=top_font,
         )
         self._text_ids["hold_text"] = self.canvas.create_text(
-            self._s(L.HOLD_IMG[0]), self._s(L.HOLD_IMG[1] + 10), text="RUN",
+            self._s(L.HOLD_IMG[0]), self._top_bar_status_y(L.HOLD_IMG[1]), text="RUN",
             fill=rgb_hex("text_primary"), anchor="w", font=top_font,
         )
 
