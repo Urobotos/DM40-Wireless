@@ -9,7 +9,10 @@ SCREEN_H = 300
 TOP_BAR_H = 35
 TOP_BAR_BG_Y = 0
 
-# Top bar – text positions (anchor "w", draw y = [1] + 10 in main_screen.py)
+# Top bar – left status text (AUTO / AUTO+ / HOLD / RUN and numeric range labels)
+TOP_BAR_STATUS_FONT = 14       # text size – was hardcoded 16; tune here
+TOP_BAR_STATUS_Y_OFFSET = 10   # vertical offset from RANGE_IMG[1] / HOLD_IMG[1]
+
 RANGE_IMG = (5, 9)
 HOLD_IMG = (100, 9)
 
