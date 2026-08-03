@@ -1,6 +1,6 @@
 # DM40 Wireless
 
-<p style="text-align: center">
+<p align="center" width="100%">
     <img width="50%" src="images/alientek.png" alt="Alientek Logo">
 </p>
 
@@ -21,7 +21,7 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 
 - **Windows 10/11** with working Bluetooth (BLE)
 - **Alientek DM40** multimeter (A / B / C) within range
-- To run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check *Add python to PATH* during installation
+- To run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check *`Add python to PATH`* during installation
 
 <br>
 
@@ -51,9 +51,7 @@ cd DM40-Wireless
 .\install.bat
 ```
 
-*( `install.bat` creates `.venv`, installs dependencies from `requirements.txt`, and installs Nuitka for building )* <br><br>
-
-**To build the exe**, **Visual Studio 2022/2025/2026** with the **"Desktop development with C++"** workload is required. The build script (`build_exe.bat`) auto-detects MSVC — no manual path setup needed.<br><br>
+*( `install.bat` creates `.venv`, installs dependencies from `requirements.txt`, and installs `Nuitka` for building )* <br><br>
 
 On first run, copy the settings template:
 
@@ -160,17 +158,23 @@ The file lives next to the exe or in the project root. It is not committed to gi
 
 ## Building the exe and release zip (maintainers):
 
+> **To build the exe**, **Visual Studio 2022/2025/2026** with the **"Desktop development with C++"** workload is required. The build script (`build_exe.bat`) auto-detects MSVC — no manual path > setup needed.<br><br>
+
 ```bat
 build_exe.bat
 release_zip.bat
 ```
+
+<br>
 
 - **`build_exe.bat`** — Nuitka `--onefile` + MSVC, output: `dist\DM40 Wireless.exe`
   - Auto-detects Visual Studio 2022/2025/2026 (requires "Desktop development with C++" workload)
   - Copies `i18n\*.toml` and `settings.example.json` alongside the exe as external assets
 - **`release_zip.bat`** — packages exe + `i18n\` + `settings.json` → `release\DM40-Wireless-win64.zip`
 
-To publish a release on GitHub:
+<br>
+
+**To publish a release on GitHub:**
 
 1. Build the exe and zip (see above).
 2. Create a new Release from `main` with a tag such as `v1.0.0`.
@@ -221,11 +225,11 @@ DM40-Wireless/
 
 ## License:
 
-<p style="text-align: center"><strong>
+<p align="center" width="100%"><strong>
      This project is licensed under the MIT License — Copyright (c) 2026 Urobotos.
 </strong></p>
 
-<p style="text-align: center">
+<p align="center" width="100%">
     <img width="100" src="images/bin_urobotos.png" alt="Urobotos">
 </p>
 
