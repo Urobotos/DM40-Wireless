@@ -70,6 +70,21 @@ class SetupScreen(tk.Frame):
             fill=rgb_hex("text_primary"), anchor="center", font=status_font, tags="setup_chrome",
         )
         self._set_status(t("setup.status_initial"))
+        self._place_settings_icon()
+
+    def _place_settings_icon(self) -> None:
+        """Settings (⚙️) icon in the top bar (same position as main screen)."""
+        from gui.assets import bind_clickable
+
+        photo = self._top_bar_icon("settings.png", L.TOP_BAR_SETTINGS_W)
+        if photo:
+            self._show_sprite("settings", photo,
+                              self._s(L.SETTINGS_IMG[0]), self._s(L.SETTINGS_IMG[1]))
+        sx, sy, sw, sh = L.SETTINGS_HIT
+        bind_clickable(
+            self.canvas, self._s(sx), self._s(sy), self._s(sw), self._s(sh),
+            self.app.show_settings_screen, tag="setup_hit_settings",
+        )
 
     def _set_status(self, text: str) -> None:
         if self._status_id is not None:

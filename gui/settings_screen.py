@@ -70,7 +70,7 @@ class SettingsScreen(tk.Frame):
         bx, by, bw, bh = SL.settings_back_hit()
         bind_clickable(
             self.canvas, self._s(bx), self._s(by), self._s(bw), self._s(bh),
-            self.app.show_main_screen, tag="settings_hit_back",
+            self.app.go_back_from_settings, tag="settings_hit_back",
         )
 
     def rebuild(self) -> None:

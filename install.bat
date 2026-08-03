@@ -31,5 +31,19 @@ if errorlevel 1 (
 )
 
 echo.
-echo Done. Launch "DM40 Wireless.bat"
+echo Done. Dependencies installed.
+echo.
+
+REM --- Install Nuitka for building ---
+echo Installing Nuitka (for build_exe.bat)...
+python -m pip install nuitka
+if errorlevel 1 (
+    echo Nuitka install failed. Build will not be available.
+    pause
+    exit /b 1
+)
+
+echo.
+echo Done. Launch "DM40 Wireless.bat" for development.
+echo To build executable: build_exe.bat
 pause

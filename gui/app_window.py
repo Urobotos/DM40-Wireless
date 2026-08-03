@@ -297,6 +297,7 @@ class DM40App:
         self.range_screen.raise_click_layer()
 
     def show_settings_screen(self) -> None:
+        self._screen_before_settings = self._current_screen
         self._current_screen = "settings"
         self.settings_screen.rebuild()
         self.main_screen.lower()
@@ -305,6 +306,13 @@ class DM40App:
         self.settings_screen.lift()
         self.apply_settings()
         self.settings_screen.raise_click_layer()
+
+    def go_back_from_settings(self) -> None:
+        """Return to the screen that was visible before entering settings."""
+        if getattr(self, "_screen_before_settings", "") == "setup":
+            self.show_setup_screen()
+        else:
+            self.show_main_screen()
 
     def cycle_mode(self, group_id: str) -> None:
         self.main_screen.release_hold_freeze()
