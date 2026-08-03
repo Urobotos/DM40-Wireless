@@ -13,12 +13,12 @@ dist-info/
 venv/
 ENV/
 
-# PyInstaller
+# PyInstaller / Nuitka build output
 build/
 dist/
 *.spec
 
-# Lokální nastavení a stav (šablona: settings.example.json)
+# Local settings and UI state (template: settings.example.json)
 settings.json
 dm40_ui_state.json
 
@@ -35,19 +35,19 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
-# Logy a dočasné soubory
+# Logs and temp files
 *.log
 *.tmp
 
-# Lokální poznámky / sniff logy (obsahují MAC, protokol z vývoje)
+# Local notes / BLE sniff logs (may contain MAC addresses, dev protocol dumps)
 sniffing.txt
 nRF_connect_ble_log.txt
 
-# Zálohy
+# Backups and design sources
 images/Photoshop/
 *.psd
 
-# Release artefakty (zip vytváří release_zip.bat)
+# Release artifacts (zip created by release_zip.bat)
 release/
 *.zip
 CLAUDE.md

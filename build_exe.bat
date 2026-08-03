@@ -1,7 +1,7 @@
 @echo off
 cd /d "%~dp0"
 echo ============================================
-echo  DM40 Wireless – Nuitka + MSVC Build
+echo  DM40 Wireless - Nuitka + MSVC Build
 echo ============================================
 echo.
 
