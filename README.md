@@ -21,7 +21,7 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 
 - **Windows 10/11** with working Bluetooth (BLE)
 - **Alientek DM40** multimeter (A / B / C) within range
-- To run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check *`Add python to PATH`* during installation
+- To run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check **`Add python to PATH`** during installation
 
 <br>
 
@@ -158,12 +158,12 @@ The file lives next to the exe or in the project root. It is not committed to gi
 
 ## Building the exe and release zip (maintainers):
 
-> **To build the exe**, **Visual Studio 2022/2025/2026** with the **"Desktop development with C++"** workload is required. The build script (`build_exe.bat`) auto-detects MSVC — no manual path > setup needed.<br><br>
-
 ```bat
 build_exe.bat
 release_zip.bat
 ```
+
+> **To build the exe**, **Visual Studio 2022/2025/2026** with the **"Desktop development with C++"** workload is required. The build script (`build_exe.bat`) auto-detects MSVC — no manual path > setup needed.
 
 <br>
 
