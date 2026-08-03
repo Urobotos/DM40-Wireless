@@ -35,7 +35,7 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 
 **3.** Run **`DM40 Wireless.exe`**
 
-**4.** On first launch, the **Connect** screen appears — search for your meter, select it in the list, and click **Connect**. The MAC address is saved to `settings.json` next to the exe; on the next launch the app connects automatically.
+**4.** On first launch, the **Connect** screen appears — search for your meter, select it in the list, and click **Connect**. The MAC address is saved to `settings.json` next to the exe, on the next launch the app connects automatically.
 
 > The distribution is a single executable built with Nuitka. The `i18n\` folder and `settings.json` must stay next to the exe — the app reads language files and settings from its own directory at runtime.
 
