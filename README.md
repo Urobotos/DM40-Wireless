@@ -93,6 +93,7 @@ Then start the app using one of these:
 - **Search** — scan for nearby DM40 BLE devices
 - Click a list row — select a device
 - **Connect** — save MAC and model, connect, and go to the main screen
+- ⚙️ In the **Settings screen** you can change the language | ⚙️ 在“设置”屏幕中，您可以更改语言。
 
 ### Main screen:
 
