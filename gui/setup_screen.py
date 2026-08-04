@@ -156,7 +156,7 @@ class SetupScreen(tk.Frame):
 
     def _draw_bottom_buttons(self) -> None:
         self._setup_btn_bg_ids.clear()
-        font = ("sans-serif", self._s(13), "bold")
+        font = ("sans-serif", self._s(13), "normal")
         for i, (label, (x, y, w, h)) in enumerate(zip(SL.setup_btn_labels(), SL.setup_button_slots())):
             rx, ry, rw, rh = self._s(x), self._s(y), self._s(w), self._s(h)
             radius = self._s(L.MODE_BTN_RADIUS)
