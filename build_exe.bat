@@ -88,6 +88,12 @@ if exist "dist\DM40 Wireless" rmdir /S /Q "dist\DM40 Wireless"
   --standalone ^
   --windows-console-mode=disable ^
   --windows-icon-from-ico=images/app.ico ^
+  --company-name="Urobotos" ^
+  --product-name="DM40 Wireless" ^
+  --file-description="DM40 Wireless - Bluetooth multimeter desktop app" ^
+  --file-version=1.2.0 ^
+  --product-version=1.2.0 ^
+  --copyright="Copyright (C) 2026 Urobotos" ^
   --enable-plugin=tk-inter ^
   --include-data-dir=images=images ^
   --include-data-files=i18n/en-US.toml=i18n/en-US.toml ^
