@@ -51,7 +51,7 @@ cd DM40-Wireless
 .\install.bat
 ```
 
-*( `install.bat` creates `.venv`, installs dependencies from `requirements.txt`, and installs `Nuitka` for building )* <br><br>
+*(* `install.bat` *creates* `.venv`*, installs dependencies from* `requirements.txt`*, and installs* `Nuitka` *for building )* <br><br>
 
 On first run, copy the settings template:
 
