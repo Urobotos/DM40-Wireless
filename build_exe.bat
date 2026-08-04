@@ -79,11 +79,15 @@ if errorlevel 1 (
     exit /b 1
 )
 
-REM --- Nuitka build ---
-echo [3/4] Building with Nuitka --onefile...
+REM --- Nuitka build (standalone folder; avoids onefile AV false positives) ---
+echo [3/4] Building with Nuitka --standalone...
+if exist "dist\app.dist" rmdir /S /Q "dist\app.dist"
+if exist "dist\DM40 Wireless" rmdir /S /Q "dist\DM40 Wireless"
+
 "%PY%" -m nuitka ^
-  --onefile ^
+  --standalone ^
   --windows-console-mode=disable ^
+  --windows-icon-from-ico=images/app.ico ^
   --enable-plugin=tk-inter ^
   --include-data-dir=images=images ^
   --include-data-files=i18n/en-US.toml=i18n/en-US.toml ^
@@ -103,35 +107,46 @@ if errorlevel 1 (
     exit /b 1
 )
 
-REM --- Verify output and copy external assets ---
+REM --- Verify output and prepare distribution folder ---
 echo [4/4] Verifying output and copying external assets...
-if not exist "dist\DM40 Wireless.exe" (
-    echo [ERROR] Output exe not found.
+if not exist "dist\app.dist\DM40 Wireless.exe" (
+    echo [ERROR] Output exe not found in dist\app.dist\
     pause
     exit /b 1
 )
 
-REM Copy i18n language files (external, not packed in exe)
+REM Rename Nuitka default folder to a clear distribution name
+move /Y "dist\app.dist" "dist\DM40 Wireless" >nul
+if errorlevel 1 (
+    echo [ERROR] Failed to rename dist\app.dist to dist\DM40 Wireless
+    pause
+    exit /b 1
+)
+
+REM Copy i18n language files next to the exe (external, editable)
 if exist "i18n" (
-    if not exist "dist\i18n" mkdir "dist\i18n"
-    xcopy /Y /E "i18n\*.toml" "dist\i18n\" >nul 2>&1
-    echo   i18n\ copied to dist\i18n\
+    if not exist "dist\DM40 Wireless\i18n" mkdir "dist\DM40 Wireless\i18n"
+    xcopy /Y /E "i18n\*.toml" "dist\DM40 Wireless\i18n\" >nul 2>&1
+    echo   i18n\ copied to dist\DM40 Wireless\i18n\
 )
 
 REM Copy settings template as default config
-if not exist "dist\settings.json" (
-    copy /Y "settings.example.json" "dist\settings.json" >nul 2>&1
-    echo   settings.example.json copied to dist\settings.json
+if not exist "dist\DM40 Wireless\settings.json" (
+    copy /Y "settings.example.json" "dist\DM40 Wireless\settings.json" >nul 2>&1
+    echo   settings.example.json copied to dist\DM40 Wireless\settings.json
 )
 
 echo.
 echo ============================================
 echo  Build succeeded
-echo  Output: dist\DM40 Wireless.exe
+echo  Output folder: dist\DM40 Wireless\
 echo.
 echo  Distribution folder contents:
-echo    dist\DM40 Wireless.exe
-echo    dist\i18n\          (language files)
-echo    dist\settings.json   (default config)
+echo    dist\DM40 Wireless\DM40 Wireless.exe
+echo    dist\DM40 Wireless\           (runtime DLLs / bundled data)
+echo    dist\DM40 Wireless\i18n\      (language files)
+echo    dist\DM40 Wireless\settings.json
 echo ============================================
+echo.
+echo  Note: Keep the whole folder together - do not move the exe alone.
 pause
