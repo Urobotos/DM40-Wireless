@@ -37,6 +37,8 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 
 **4.** On first launch, the **Connect** screen appears — search for your meter, select it in the list, and click **Connect**. The MAC address is saved to `settings.json` next to the exe, on the next launch the app connects automatically.
 
+<br>
+
 > The distribution is a **folder** built with Nuitka (`--standalone`). Keep `DM40 Wireless.exe` together with the other files in that folder (runtime libraries, `i18n\`, `settings.json`). Do not move the exe alone.
 
 <br>
@@ -168,11 +170,11 @@ release_zip.bat
 
 <br>
 
-- `build_exe.bat` — Nuitka `--standalone` + MSVC, output folder: `dist\DM40 Wireless\`
+- **`build_exe.bat`** — Nuitka `--standalone` + MSVC, output folder: `dist\DM40 Wireless\`
   - Auto-detects Visual Studio 2022/2025/2026 (requires "Desktop development with C++" workload)
   - Copies `i18n\*.toml` and `settings.example.json` into the distribution folder
   - Uses folder mode (not `--onefile`) to reduce Windows Defender false positives
-- `release_zip.bat` — packages `dist\DM40 Wireless\` → `release\DM40-Wireless-win64.zip`
+- **`release_zip.bat`** — packages `dist\DM40 Wireless\` → `release\DM40-Wireless-win64.zip`
 
 <br>
 
@@ -229,9 +231,9 @@ DM40-Wireless/
 
 ## License:
 
-<p align="center" width="100%"><strong>
+<p align="center" width="100%">
      This project is licensed under the MIT License — Copyright (c) 2026 Urobotos.
-</strong></p>
+</p>
 
 <p align="center" width="100%">
     <img width="100" src="images/bin_urobotos.png" alt="Urobotos">
