@@ -201,10 +201,11 @@ DM40-Wireless/
 ├── release/                  # Release archives (not in git)
 ├── dist/                     # Build output (not in git)
 │   └── DM40 Wireless/           # Standalone distribution folder
-│       ├── DM40 Wireless.exe    # launcher (Windows clickable)
 │       ├── i18n/                # External language files
+│       ├── DM40 Wireless.exe    # launcher (Windows clickable)
 │       ├── settings.json        # Default runtime config
-│       └── dm40_ui_state.json   # UI state (auto-generated at runtime)
+│       ├── dm40_ui_state.json   # UI state (auto-generated at runtime)
+│       └── ...                  # Runtime DLLs / bundled data
 │
 ├── DM40 Wireless.bat         # Dev launcher (Windows clickable)
 ├── app.py, app.pyw           # Entry points
