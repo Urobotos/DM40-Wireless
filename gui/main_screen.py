@@ -107,7 +107,7 @@ class MainScreen(tk.Frame):
         self._sprite_ids[key] = self.canvas.create_image(x, y, anchor=anchor, image=photo, tags="sprite")
 
     def _top_bar_status_font(self) -> tuple[str, int, str]:
-        return ("sans-serif", self._s(L.TOP_BAR_STATUS_FONT), "")
+        return ("sans-serif", self._s(L.TOP_BAR_STATUS_FONT), "normal")
 
     def _top_bar_status_y(self, img_y: float) -> int:
         return self._s(img_y + L.TOP_BAR_STATUS_Y_OFFSET)
