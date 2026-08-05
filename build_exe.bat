@@ -154,5 +154,5 @@ echo    dist\DM40 Wireless\i18n\      (language files)
 echo    dist\DM40 Wireless\settings.json
 echo ============================================
 echo.
-echo  Note: Keep the whole folder together - do not move the exe alone.
+echo Note: Keep the whole folder together - do not move the exe alone.
 pause

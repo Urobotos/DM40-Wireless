@@ -45,5 +45,5 @@ echo      i18n\
 echo      settings.json
 echo ============================================
 echo.
-echo  Users must extract the whole folder and keep files together.
+echo Users must extract the whole folder and keep files together.
 pause
