@@ -13,6 +13,7 @@ from core.i18n import t
 from core.parsing import Measurement
 from gui import layout as L
 from gui.assets import CLICK_HOTSPOT_TAG
+from gui.fonts import gui_font
 from gui.theme import rgb_hex
 
 
@@ -27,12 +28,14 @@ class GraphPanel:
         *,
         on_ble_command: Callable[[list[int]], None],
         root: tk.Misc,
+        settings: dict | None = None,
     ) -> None:
         self.canvas = canvas
         self._s = scale_fn
         self.sprites = sprites
         self._send_ble = on_ble_command
         self._root = root
+        self._settings = settings
 
         self._buf: deque[float] = deque(maxlen=L.GRAPH_SAMPLE_MAX)
         self._pad = 0.0
@@ -67,7 +70,7 @@ class GraphPanel:
         self._rel_bg_id: int | None = None
 
     def install(self) -> None:
-        font = ("sans-serif", self._s(L.GRAPH_FONT), "")
+        font = gui_font(self._settings, self._s(L.GRAPH_FONT), "normal")
         layout = L.graph_layout()
         gx, gy, gw, gh = L.GRAPH_AREA
         self._area_px = (self._s(gx), self._s(gy), self._s(gw), self._s(gh))
@@ -116,7 +119,7 @@ class GraphPanel:
             tags=(self.TAG, "graph_min"),
         )
 
-        rel_font = ("sans-serif", self._s(L.GRAPH_FONT), "bold")
+        rel_font = gui_font(self._settings, self._s(L.GRAPH_FONT), "bold")
         rcx = self._s(rx + rw // 2)
         rcy = self._s(ry + rh // 2)
         self._sidebar_ids["rel"] = self.canvas.create_text(

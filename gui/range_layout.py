@@ -7,13 +7,13 @@ RANGE_BTN_GAP = 5
 RANGE_BTN_H = 38
 RANGE_BTN_COLS = 3
 RANGE_BTN_FONT = 13
-RANGE_TITLE_FONT = 14
+RANGE_TITLE_FONT = 13
 RANGE_SEL_ICON_MAX_H = 30
 RANGE_SEL_ICON_GAP = 3
 RANGE_BTN_PAD_LEFT = 8  # icon + text left alignment (same in all rows)
 RANGE_BACK_IMG = (8, 8)
 RANGE_BACK_HIT_PAD = 4
-RANGE_TITLE_Y = 16
+RANGE_TITLE_Y = 18      # Align title text in top bar on Y axis
 
 VOLTAGE_KINDS = ("VDC", "VAC", "VDC+AC")
 CURRENT_KINDS = ("ADC", "AAC", "ADC+AC")

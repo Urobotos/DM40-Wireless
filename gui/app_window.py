@@ -15,7 +15,7 @@ from gui.main_screen import MainScreen
 from gui.range_screen import RangeScreen
 from gui.raw_console import RawConsole
 from gui.settings import load_settings, apply_saved_model, save_settings, persist_device
-from gui.setup_screen import SetupScreen
+from gui.connect_screen import ConnectScreen
 from gui.settings_screen import SettingsScreen
 from gui.theme import rgb_hex
 from gui.win_titlebar import fit_toplevel_to_client, schedule_windows_titlebar
@@ -83,17 +83,17 @@ class DM40App:
         self.main_screen = MainScreen(self.container, self, self.scale)
         self.range_screen = RangeScreen(self.container, self, self.scale)
         self.settings_screen = SettingsScreen(self.container, self, self.scale)
-        self.setup_screen = SetupScreen(self.container, self, self.scale)
+        self.connect_screen = ConnectScreen(self.container, self, self.scale)
         place_kw = dict(x=0, y=0, width=self._client_w, height=self._client_dm40_h)
         for screen in (
-            self.main_screen, self.range_screen, self.settings_screen, self.setup_screen,
+            self.main_screen, self.range_screen, self.settings_screen, self.connect_screen,
         ):
             screen.place(**place_kw)
 
         self.main_screen.refresh_mode_buttons(self.mode_state)
         schedule_windows_titlebar(self.root)
         if self._needs_device_setup():
-            self.show_setup_screen(auto_scan=True)
+            self.show_connect_screen(auto_scan=True)
         else:
             self.show_main_screen()
             self._sync_raw_callback()
@@ -115,7 +115,7 @@ class DM40App:
         if not self._ble_started:
             self.ble.start()
             self._ble_started = True
-        self.setup_screen.on_hide()
+        self.connect_screen.on_hide()
         self.show_main_screen()
 
     def reload_language(self, lang_code: str) -> None:
@@ -139,18 +139,18 @@ class DM40App:
         kind = self.mode_state.get_active_kind()
         self.range_screen.rebuild_for_kind(kind, self._last_range_flag)
         self.settings_screen.rebuild()
-        self.setup_screen.refresh_all()
+        self.connect_screen.refresh_all()
         self._apply_window_size()
 
-    def show_setup_screen(self, *, auto_scan: bool = False) -> None:
-        self._current_screen = "setup"
+    def show_connect_screen(self, *, auto_scan: bool = False) -> None:
+        self._current_screen = "connect"
         self.main_screen.lower()
         self.range_screen.lower()
         self.settings_screen.lower()
-        self.setup_screen.lift()
+        self.connect_screen.lift()
         self.apply_settings()
-        self.setup_screen.on_show(auto_scan=auto_scan)
-        self.setup_screen.raise_click_layer()
+        self.connect_screen.on_show(auto_scan=auto_scan)
+        self.connect_screen.raise_click_layer()
 
     def _sync_raw_callback(self) -> None:
         """Without RAW console, do not call callback from BLE thread (every poll TX+RX)."""
@@ -182,7 +182,7 @@ class DM40App:
         self.container.configure(width=self._client_w, height=self._client_dm40_h)
         place_kw = dict(x=0, y=0, width=self._client_w, height=self._client_dm40_h)
         for screen in (
-            self.main_screen, self.range_screen, self.settings_screen, self.setup_screen,
+            self.main_screen, self.range_screen, self.settings_screen, self.connect_screen,
         ):
             screen.place(**place_kw)
         if self._current_screen == "main":
@@ -280,7 +280,7 @@ class DM40App:
         self._current_screen = "main"
         self.range_screen.lower()
         self.settings_screen.lower()
-        self.setup_screen.lower()
+        self.connect_screen.lower()
         self.main_screen.lift()
         self.apply_settings()
         self.main_screen.raise_click_layer()
@@ -291,7 +291,7 @@ class DM40App:
         self.range_screen.rebuild_for_kind(kind, self._last_range_flag)
         self.main_screen.lower()
         self.settings_screen.lower()
-        self.setup_screen.lower()
+        self.connect_screen.lower()
         self.range_screen.lift()
         self.apply_settings()
         self.range_screen.raise_click_layer()
@@ -302,15 +302,15 @@ class DM40App:
         self.settings_screen.rebuild()
         self.main_screen.lower()
         self.range_screen.lower()
-        self.setup_screen.lower()
+        self.connect_screen.lower()
         self.settings_screen.lift()
         self.apply_settings()
         self.settings_screen.raise_click_layer()
 
     def go_back_from_settings(self) -> None:
         """Return to the screen that was visible before entering settings."""
-        if getattr(self, "_screen_before_settings", "") == "setup":
-            self.show_setup_screen()
+        if getattr(self, "_screen_before_settings", "") == "connect":
+            self.show_connect_screen()
         else:
             self.show_main_screen()
 

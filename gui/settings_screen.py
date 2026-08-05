@@ -12,6 +12,7 @@ from gui import settings_layout as SL
 from gui.assets import bind_clickable, raise_click_hotspots
 from gui.settings import save_settings
 from gui.sprites import SpriteCache
+from gui.fonts import gui_font
 from gui.theme import rgb_hex
 
 
@@ -47,7 +48,7 @@ class SettingsScreen(tk.Frame):
             0, 0, self._s(L.SCREEN_W), self._s(L.TOP_BAR_H),
             fill=rgb_hex("top_bar_background"), outline="", tags="settings_chrome",
         )
-        font = ("sans-serif", self._s(SL.SETTINGS_TITLE_FONT), "bold")
+        font = gui_font(self.app.settings, self._s(SL.SETTINGS_TITLE_FONT), "normal")
         self._title_id = self.canvas.create_text(
             self._s(L.SCREEN_W // 2), self._s(SL.SETTINGS_TITLE_Y), text=t("settings.title"),
             fill=rgb_hex("text_primary"), anchor="center", font=font, tags="settings_chrome",
@@ -78,8 +79,8 @@ class SettingsScreen(tk.Frame):
         if self._title_id is not None:
             self.canvas.itemconfig(self._title_id, text=t("settings.title"))
         self.canvas.delete("settings_row")
-        label_font = ("sans-serif", self._s(SL.SETTINGS_LABEL_FONT), "normal")
-        state_font = ("sans-serif", self._s(SL.SETTINGS_STATE_FONT), "bold")
+        label_font = gui_font(self.app.settings, self._s(SL.SETTINGS_LABEL_FONT), "normal")
+        state_font = gui_font(self.app.settings, self._s(SL.SETTINGS_STATE_FONT), "normal")
 
         for (key, label), (x, y, w, h) in zip(SL.setting_rows(), SL.settings_row_slots()):
             if key == "language":
@@ -211,7 +212,7 @@ class SettingsScreen(tk.Frame):
         inner = tk.Frame(popup, bg=rgb_hex("background"), padx=pad, pady=pad)
         inner.pack(fill="both", expand=True)
 
-        label_font = ("sans-serif", self._s(SL.SETTINGS_LABEL_FONT), "normal")
+        popup_font = gui_font(self.app.settings, self._s(SL.SETTINGS_STATE_FONT), "normal")
 
         for lang_code, display in languages.items():
             active = lang_code == current
@@ -223,7 +224,7 @@ class SettingsScreen(tk.Frame):
 
             lbl = tk.Label(
                 row, text=display, bg=bg, fg=fg, anchor="w",
-                font=label_font, padx=self._s(SL.SETTINGS_ROW_MARGIN),
+                font=popup_font, padx=self._s(SL.SETTINGS_ROW_MARGIN),
             )
             lbl.pack(fill="both", expand=True)
 

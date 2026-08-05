@@ -18,6 +18,7 @@ DEFAULTS = {
     "always_on_top": False,
     "raw_console": False,
     "language": "en-US",
+    "gui_font": "Arial",
 }
 
 

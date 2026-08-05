@@ -9,5 +9,6 @@
   "mini_app": false,
   "always_on_top": false,
   "raw_console": false,
-  "language": "en-US"
+  "language": "en-US",
+  "gui_font": "Arial"
 }

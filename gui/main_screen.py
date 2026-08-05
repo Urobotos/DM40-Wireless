@@ -17,6 +17,7 @@ from gui import layout as L
 from gui.assets import CLICK_HOTSPOT_TAG, bind_clickable, raise_click_hotspots
 from gui.display_debug import clear_display_debug, draw_debug_rect
 from gui.sprites import SpriteCache, main_unit_filename
+from gui.fonts import gui_font
 from gui.theme import rgb_hex
 
 class MainScreen(tk.Frame):
@@ -57,6 +58,7 @@ class MainScreen(tk.Frame):
             self.canvas, self._s, self.sprites,
             on_ble_command=self.app.ble.send_command,
             root=app.root,
+            settings=app.settings,
         )
         settings = getattr(app, "settings", {})
         self._debug_hotspots = bool(settings.get("debug_click_hotspots", False))
@@ -83,10 +85,10 @@ class MainScreen(tk.Frame):
         return int(v * self.scale)
 
     def _main_value_font(self) -> tuple[str, int, str]:
-        return ("sans-serif", self._s(L.MAIN_VALUE_FONT), "bold")
+        return gui_font(self.app.settings, self._s(L.MAIN_VALUE_FONT), "bold")
 
     def _bt_off_font(self) -> tuple[str, int, str]:
-        return ("sans-serif", self._s(L.MAIN_BT_OFF_FONT), "bold")
+        return gui_font(self.app.settings, self._s(L.MAIN_BT_OFF_FONT), "bold")
 
     def _main_row_cy(self) -> int:
         return self._s(L.MAIN_VALUE_ROW_CY)
@@ -107,7 +109,7 @@ class MainScreen(tk.Frame):
         self._sprite_ids[key] = self.canvas.create_image(x, y, anchor=anchor, image=photo, tags="sprite")
 
     def _top_bar_status_font(self) -> tuple[str, int, str]:
-        return ("sans-serif", self._s(L.TOP_BAR_STATUS_FONT), "normal")
+        return gui_font(self.app.settings, self._s(L.TOP_BAR_STATUS_FONT), "normal")
 
     def _top_bar_status_y(self, img_y: float) -> int:
         return self._s(img_y + L.TOP_BAR_STATUS_Y_OFFSET)
@@ -133,7 +135,7 @@ class MainScreen(tk.Frame):
                     fill=rgb_hex("save_area"), outline="", tags="save_slot_bg",
                 )
         font_main = self._main_value_font()
-        font_sec = ("sans-serif", self._s(L.SEC_FONT), "bold")
+        font_sec = gui_font(self.app.settings, self._s(L.SEC_FONT), "bold")
         layout = L.main_value_layout()
         sign_x, _, sign_w, _ = layout["sign"]
         digits_x, _, digits_w, _ = layout["digits"]
@@ -167,7 +169,7 @@ class MainScreen(tk.Frame):
             fill=rgb_hex("text_primary"), anchor="w", font=top_font,
         )
 
-        save_font = ("sans-serif", self._s(L.SAVE_FONT), "bold")
+        save_font = gui_font(self.app.settings, self._s(L.SAVE_FONT), "bold")
         for i in range(SAVE_SLOT_COUNT):
             self._text_ids[f"save_{i}"] = self.canvas.create_text(
                 0, 0, text="", anchor="w", font=save_font,
