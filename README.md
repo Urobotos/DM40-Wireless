@@ -146,7 +146,7 @@ The file lives next to the exe or in the project root. It is not committed to gi
 
 | Key              | Meaning                                                                                      |
 | ---------------- | -------------------------------------------------------------------------------------------- |
-| `target_mac`     | DM40 MAC address (`""` = show Connect screen)                                                |
+| `target_mac`     | DM40 MAC address (empty `""` = show Connect screen)                                          |
 | `model_name`     | `DM40A`, `DM40B`, or `DM40C`                                                                 |
 | `device_counts`  | Range count scale (40k / 50k / 60k)                                                          |
 | `window_scale`   | Window scale (`1.0` = 480×300 logical px)                                                    |
@@ -154,6 +154,7 @@ The file lives next to the exe or in the project root. It is not committed to gi
 | `always_on_top`  | Always on top (boolean: false / true)                                                        |
 | `raw_console`    | RAW console (boolean: false / true)                                                          |
 | `language`       | UI language code matching a file in `i18n/` (e.g. `"en-US"`, `"zh-CN"`; default `"en-US"`)   |
+| `gui_font`       | Configurable UI font family, default `Arial`                                                 |
 
 <br>
 
