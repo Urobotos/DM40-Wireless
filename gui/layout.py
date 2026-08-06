@@ -10,7 +10,7 @@ TOP_BAR_H = 35
 TOP_BAR_BG_Y = 0
 
 # Top bar – left status text (AUTO / AUTO+ / HOLD / RUN and numeric range labels)
-TOP_BAR_STATUS_FONT = 14       # text size – was hardcoded 16; tune here
+TOP_BAR_STATUS_FONT = 13       # text size – was hardcoded 16; tune here
 TOP_BAR_STATUS_Y_OFFSET = 10   # vertical offset from RANGE_IMG[1] / HOLD_IMG[1]
 
 RANGE_IMG = (5, 9)

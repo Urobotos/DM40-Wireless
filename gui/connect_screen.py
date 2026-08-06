@@ -10,14 +10,15 @@ import tkinter as tk
 from ble.discovery import DM40Device, scan_dm40_devices_sync
 from core.config import SCREEN_HEIGHT, SCREEN_WIDTH
 from core.i18n import t
+from gui import connect_layout as CL
 from gui import layout as L
-from gui import setup_layout as SL
 from gui.assets import bind_clickable, raise_click_hotspots
 from gui.sprites import SpriteCache
+from gui.fonts import gui_font
 from gui.theme import rgb_hex
 
 
-class SetupScreen(tk.Frame):
+class ConnectScreen(tk.Frame):
     def __init__(self, master, app, scale: float) -> None:
         super().__init__(master, bg=rgb_hex("background"))
         self.app = app
@@ -38,6 +39,7 @@ class SetupScreen(tk.Frame):
         self._ble_pulse_on = True
         self._ble_pulse_after: str | None = None
         self._status_id: int | None = None
+        self._connect_btn_bg_ids: dict[int, int] = {}
 
         self._draw_chrome()
         self._draw_bottom_buttons()
@@ -51,25 +53,38 @@ class SetupScreen(tk.Frame):
     def _draw_chrome(self) -> None:
         self.canvas.create_rectangle(
             0, 0, self._s(L.SCREEN_W), self._s(L.TOP_BAR_H),
-            fill=rgb_hex("top_bar_background"), outline="", tags="setup_chrome",
+            fill=rgb_hex("top_bar_background"), outline="", tags="connect_chrome",
         )
-        font = ("sans-serif", self._s(SL.SETUP_TITLE_FONT), "bold")
+        font = gui_font(self.app.settings, self._s(CL.SETUP_TITLE_FONT), "bold")
         self.canvas.create_text(
-            self._s(L.SCREEN_W // 2), self._s(SL.SETUP_TITLE_Y), text=t("setup.title"),
-            fill=rgb_hex("text_primary"), anchor="center", font=font, tags="setup_chrome",
+            self._s(L.SCREEN_W // 2), self._s(CL.SETUP_TITLE_Y), text=t("setup.title"),
+            fill=rgb_hex("text_primary"), anchor="center", font=font, tags="connect_chrome",
         )
-        hint_font = ("sans-serif", self._s(SL.SETUP_HINT_FONT), "normal")
+        hint_font = gui_font(self.app.settings, self._s(CL.SETUP_HINT_FONT), "normal")
         self.canvas.create_text(
-            self._s(L.SCREEN_W // 2), self._s(SL.SETUP_HINT_Y),
+            self._s(L.SCREEN_W // 2), self._s(CL.SETUP_HINT_Y),
             text=t("setup.hint"),
-            fill=rgb_hex("text_secondary"), anchor="center", font=hint_font, tags="setup_chrome",
+            fill=rgb_hex("text_secondary"), anchor="center", font=hint_font, tags="connect_chrome",
         )
-        status_font = ("sans-serif", self._s(SL.SETUP_STATUS_FONT), "normal")
+        status_font = gui_font(self.app.settings, self._s(CL.SETUP_STATUS_FONT), "normal")
         self._status_id = self.canvas.create_text(
-            self._s(L.SCREEN_W // 2), self._s(SL.SETUP_STATUS_Y), text="",
-            fill=rgb_hex("text_primary"), anchor="center", font=status_font, tags="setup_chrome",
+            self._s(L.SCREEN_W // 2), self._s(CL.SETUP_STATUS_Y), text="",
+            fill=rgb_hex("text_primary"), anchor="center", font=status_font, tags="connect_chrome",
         )
         self._set_status(t("setup.status_initial"))
+        self._place_settings_icon()
+
+    def _place_settings_icon(self) -> None:
+        """Settings icon in the top bar (same position as main screen)."""
+        photo = self._top_bar_icon("settings.png", L.TOP_BAR_SETTINGS_W)
+        if photo:
+            self._show_sprite("settings", photo,
+                              self._s(L.SETTINGS_IMG[0]), self._s(L.SETTINGS_IMG[1]))
+        sx, sy, sw, sh = L.SETTINGS_HIT
+        bind_clickable(
+            self.canvas, self._s(sx), self._s(sy), self._s(sw), self._s(sh),
+            self.app.show_settings_screen, tag="connect_hit_settings",
+        )
 
     def _set_status(self, text: str) -> None:
         if self._status_id is not None:
@@ -85,7 +100,7 @@ class SetupScreen(tk.Frame):
         if key in self._sprite_ids:
             self.canvas.delete(self._sprite_ids[key])
         self._sprite_ids[key] = self.canvas.create_image(
-            x, y, anchor="nw", image=photo, tags="setup_chrome",
+            x, y, anchor="nw", image=photo, tags="connect_chrome",
         )
 
     def _hide_sprite(self, key: str) -> None:
@@ -123,30 +138,51 @@ class SetupScreen(tk.Frame):
         self._stop_bt_pulse()
         self._show_bt_icon()
 
+    def _connect_btn_bg_photo(self, rw: int, rh: int, radius: int, *, hovered: bool) -> tk.PhotoImage | None:
+        color = "buttons_active" if hovered else "buttons"
+        return self.sprites.rounded_button(color, rw, rh, radius)
+
+    def _set_connect_btn_hover(self, index: int, hovered: bool) -> None:
+        bg_id = self._connect_btn_bg_ids.get(index)
+        if bg_id is None:
+            return
+        x, y, w, h = CL.setup_button_slots()[index]
+        rw, rh = self._s(w), self._s(h)
+        radius = self._s(L.MODE_BTN_RADIUS)
+        photo = self._connect_btn_bg_photo(rw, rh, radius, hovered=hovered)
+        if photo:
+            self.canvas.itemconfig(bg_id, image=photo)
+
     def _draw_bottom_buttons(self) -> None:
-        font = ("sans-serif", self._s(13), "bold")
-        for i, (label, (x, y, w, h)) in enumerate(zip(SL.setup_btn_labels(), SL.setup_button_slots())):
+        self._connect_btn_bg_ids.clear()
+        font = gui_font(self.app.settings, self._s(13), "normal")
+        for i, (label, (x, y, w, h)) in enumerate(zip(CL.setup_btn_labels(), CL.setup_button_slots())):
             rx, ry, rw, rh = self._s(x), self._s(y), self._s(w), self._s(h)
             radius = self._s(L.MODE_BTN_RADIUS)
-            photo = self.sprites.rounded_button("buttons", rw, rh, radius)
+            hit_tag = f"connect_hit_{i}"
+            photo = self._connect_btn_bg_photo(rw, rh, radius, hovered=False)
             if photo:
-                self.canvas.create_image(
-                    rx, ry, anchor="nw", image=photo, tags=("setup_btn", f"setup_btn_{label}"),
+                self._connect_btn_bg_ids[i] = self.canvas.create_image(
+                    rx, ry, anchor="nw", image=photo,
+                    tags=("connect_btn", f"connect_btn_{i}"),
                 )
             self.canvas.create_text(
                 rx + rw // 2, ry + rh // 2, text=label,
                 fill=rgb_hex("text_primary"), anchor="center", font=font,
-                tags=("setup_btn", f"setup_btn_txt_{label}"),
+                tags=("connect_btn", f"connect_btn_txt_{i}"),
             )
             cmd = self.start_scan if i == 0 else self._on_connect
             bind_clickable(
-                self.canvas, rx, ry, rw, rh, cmd, tag=f"setup_hit_{label}",
+                self.canvas, rx, ry, rw, rh, cmd, tag=hit_tag,
             )
+            self.canvas.tag_bind(hit_tag, "<Enter>", lambda _e, idx=i: self._set_connect_btn_hover(idx, True))
+            self.canvas.tag_bind(hit_tag, "<Leave>", lambda _e, idx=i: self._set_connect_btn_hover(idx, False))
 
     def refresh_all(self) -> None:
         """Rebuild all translatable text; keep device list and scan state."""
-        self.canvas.delete("setup_chrome")
-        self.canvas.delete("setup_btn")
+        self.canvas.delete("connect_chrome")
+        self.canvas.delete("connect_btn")
+        self._connect_btn_bg_ids.clear()
         self._sprite_ids.clear()
         self._draw_chrome()
         self._draw_bottom_buttons()
@@ -176,7 +212,7 @@ class SetupScreen(tk.Frame):
         self._scanning = True
         self._devices = []
         self._selected = -1
-        self.canvas.delete("setup_row")
+        self.canvas.delete("connect_row")
         self._set_status(t("setup.status_scanning"))
         self._start_bt_pulse()
         threading.Thread(target=self._scan_worker, daemon=True).start()
@@ -217,36 +253,36 @@ class SetupScreen(tk.Frame):
             self._set_status(t("setup.status_many_devices", count=len(devices)))
 
     def _rebuild_device_list(self) -> None:
-        self.canvas.delete("setup_row")
+        self.canvas.delete("connect_row")
         if not self._devices:
             self.raise_click_layer()
             return
 
-        font = ("sans-serif", self._s(SL.SETUP_ROW_FONT), "normal")
-        x = SL.SETUP_LIST_MARGIN
-        w = L.SCREEN_W - 2 * SL.SETUP_LIST_MARGIN
-        y = SL.SETUP_LIST_TOP
-        bottom = SL.setup_list_bottom()
-        row_h = SL.SETUP_ROW_H + SL.SETUP_ROW_GAP
+        font = gui_font(self.app.settings, self._s(CL.SETUP_ROW_FONT), "normal")
+        x = CL.SETUP_LIST_MARGIN
+        w = L.SCREEN_W - 2 * CL.SETUP_LIST_MARGIN
+        y = CL.SETUP_LIST_TOP
+        bottom = CL.setup_list_bottom()
+        row_h = CL.SETUP_ROW_H + CL.SETUP_ROW_GAP
 
         for i, dev in enumerate(self._devices):
-            if y + SL.SETUP_ROW_H > bottom:
+            if y + CL.SETUP_ROW_H > bottom:
                 break
             active = i == self._selected
-            rx, ry, rw, rh = self._s(x), self._s(y), self._s(w), self._s(SL.SETUP_ROW_H)
+            rx, ry, rw, rh = self._s(x), self._s(y), self._s(w), self._s(CL.SETUP_ROW_H)
             bg = "buttons_active" if active else "range_buttons"
             self.canvas.create_rectangle(
                 rx, ry, rx + rw, ry + rh,
-                fill=rgb_hex(bg), outline="", tags=("setup_row", f"setup_row_{i}"),
+                fill=rgb_hex(bg), outline="", tags=("connect_row", f"connect_row_{i}"),
             )
             self.canvas.create_text(
-                rx + self._s(SL.SETUP_ROW_PAD_LEFT), ry + rh // 2,
+                rx + self._s(CL.SETUP_ROW_PAD_LEFT), ry + rh // 2,
                 text=dev.list_label(), anchor="w", font=font,
-                fill=rgb_hex("text_primary"), tags=("setup_row", f"setup_txt_{i}"),
+                fill=rgb_hex("text_primary"), tags=("connect_row", f"connect_txt_{i}"),
             )
             bind_clickable(
                 self.canvas, rx, ry, rw, rh,
-                lambda idx=i: self._select_device(idx), tag=f"setup_row_hit_{i}",
+                lambda idx=i: self._select_device(idx), tag=f"connect_row_hit_{i}",
             )
             y += row_h
 

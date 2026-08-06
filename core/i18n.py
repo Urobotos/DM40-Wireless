@@ -31,9 +31,15 @@ from typing import Any
 
 
 def i18n_dir() -> Path:
-    """Return the i18n/ directory path; works in dev and PyInstaller bundles."""
+    """Return the external i18n/ directory path (user-editable, preferred)."""
     from core.config import PROJECT_ROOT
     return PROJECT_ROOT / "i18n"
+
+
+def _embedded_i18n_dir() -> Path:
+    """Return the embedded i18n/ directory inside the exe (read-only fallback)."""
+    from core.config import EMBEDDED_I18N_DIR
+    return EMBEDDED_I18N_DIR
 
 
 class _I18n:
@@ -54,14 +60,16 @@ class _I18n:
         """Initialize with the given language code (first load). Must run before the first ``t()`` call.
 
         Loads ``en-US.toml`` as fallback, then the file for ``language``.
+        External ``i18n/`` is preferred; embedded copy inside exe is used as fallback.
         """
         if self._initialized:
             return
         self._initialized = True
 
-        # Load English fallback
-        en_path = i18n_dir() / "en-US.toml"
-        self._load_fallback(en_path)
+        # Load English fallback (external → embedded)
+        en_path = self._resolve_path("en-US.toml")
+        if en_path is not None:
+            self._load_fallback(en_path)
 
         # Load target language
         lang = language.strip() if language else "en-US"
@@ -91,17 +99,27 @@ class _I18n:
         return self._lang
 
     def available_languages(self) -> dict[str, str]:
-        """Scan ``i18n/`` and return ``{language_code: display_name}``."""
-        d = i18n_dir()
-        if not d.is_dir():
-            self._available = {}
-            return {}
+        """Scan ``i18n/`` and return ``{language_code: display_name}``.
+
+        External ``i18n/`` is preferred; if it is missing or empty, the embedded
+        copy inside the exe is used as fallback.
+        """
         result: dict[str, str] = {}
-        for path in sorted(d.glob("*.toml")):
-            code = path.stem
-            if not code:
-                continue
-            result[code] = self._read_lang_name(path)
+        # Scan external i18n/ first
+        d = i18n_dir()
+        if d.is_dir():
+            for path in sorted(d.glob("*.toml")):
+                code = path.stem
+                if code:
+                    result[code] = self._read_lang_name(path)
+        # If nothing found externally, scan embedded fallback
+        if not result:
+            d2 = _embedded_i18n_dir()
+            if d2.is_dir():
+                for path in sorted(d2.glob("*.toml")):
+                    code = path.stem
+                    if code and code not in result:
+                        result[code] = self._read_lang_name(path)
         self._available = result
         return dict(result)
 
@@ -109,13 +127,30 @@ class _I18n:
         """Load language from ``i18n/{lang}.toml``. Returns True on success.
 
         Does not affect the fallback dict; on failure current strings are unchanged.
+        External ``i18n/`` is preferred; embedded copy inside exe is used as fallback.
         """
-        path = i18n_dir() / f"{lang}.toml"
+        path = self._resolve_path(f"{lang}.toml")
+        if path is None:
+            return False
         return self._load_toml(path, lang)
 
     # ------------------------------------------------------------------
     # Internal
     # ------------------------------------------------------------------
+
+    @staticmethod
+    def _resolve_path(filename: str) -> Path | None:
+        """Find a language file: external ``i18n/`` first, then embedded fallback.
+
+        Returns ``None`` if the file is not found in either location.
+        """
+        ext = i18n_dir() / filename
+        if ext.is_file():
+            return ext
+        emb = _embedded_i18n_dir() / filename
+        if emb.is_file():
+            return emb
+        return None
 
     @staticmethod
     def _read_lang_name(path: Path) -> str:
