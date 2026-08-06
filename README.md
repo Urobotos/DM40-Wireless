@@ -55,7 +55,7 @@ cd DM40-Wireless
 
 *(* `install.bat` *creates* `.venv`*, installs dependencies from* `requirements.txt`*, and installs* `Nuitka` *for building )* <br><br>
 
-On first run, copy the settings template:
+**On first run, copy the settings template:**
 
 ```bat
 copy settings.example.json settings.json
