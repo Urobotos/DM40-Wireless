@@ -29,17 +29,15 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 
 ## Running from Windows (Installation for end users):
 
-**1.** Open [Releases](https://github.com/Urobotos/DM40-Wireless/releases) on GitHub and download **`DM40-Wireless-win64.zip`**
-
-**2.** Extract the zip to any folder (e.g. `C:\Apps\DM40 Wireless\`)
-
-**3.** Run **`DM40 Wireless.exe`**
-
-**4.** On first launch, the **Connect** screen appears — search for your meter, select it in the list, and click **Connect**. The MAC address is saved to `settings.json` next to the exe, on the next launch the app connects automatically.
+1. Open [Releases](https://github.com/Urobotos/DM40-Wireless/releases) on GitHub and download **`DM40-Wireless-win64.zip`**
+2. Extract the zip to any folder (e.g. `C:\Apps\DM40 Wireless\`)
+3. Run **`DM40 Wireless.exe`** <br><br>
+4. On first launch, the **Connect** screen appears — search for your meter, select it in the list, and click **Connect**. <br>
+   The MAC address is saved to `settings.json` next to the exe, on the next launch the app connects automatically.
 
 <br>
 
-> The distribution is a **folder** built with Nuitka (`--standalone`). Keep `DM40 Wireless.exe` together with the other files in that folder (runtime libraries, `i18n\`, `settings.json`). Do not move the exe alone.
+> The distribution is a **folder** built with Nuitka (`--standalone`). Keep `DM40 Wireless.exe` together with the other files in that folder (runtime libraries, `i18n\`, `settings.json`). Do not move the `DM40 Wireless.exe` file alone, instead you can create a shortcut on your desktop.
 
 <br>
 
@@ -95,7 +93,7 @@ Then start the app using one of these:
 - **Search** — scan for nearby DM40 BLE devices
 - Click a list row — select a device
 - **Connect** — save MAC and model, connect, and go to the main screen
-- ⚙️ In the **Settings screen** you can change the language | ⚙️ 在“设置”屏幕中，您可以更改语言。
+- ⚙️ In the **Settings** you can change the language | ⚙️ 在**设置**中，您可以更改语言。
 
 ### Main screen:
 
@@ -121,7 +119,7 @@ Connection status, meter battery, and units are shown in the top bar from live B
 <img width="39%" src="images/screenshot_range.png" alt="RANGE screen">
 
 - List of ranges for the current measurement mode (depends on DM40A/B/C model)
-- **Back** — return to the main screen
+- ❮ **Back** — return to the main screen
 
 ### Settings screen:
 
@@ -167,24 +165,27 @@ build_exe.bat
 release_zip.bat
 ```
 
-> **To build the exe**, **Visual Studio 2022/2025/2026** with the **"Desktop development with C++"** workload is required. The build script (`build_exe.bat`) auto-detects MSVC — no manual path > setup needed.
+> **To build the exe**, **Visual Studio 2022/2025/2026** with the **"Desktop development with C++"**workload is required. <br>
+> The build script (`build_exe.bat`) auto-detects MSVC — no manual path setup needed.
 
 <br>
 
-- **`build_exe.bat`** — Nuitka `--standalone` + MSVC, output folder: `dist\DM40 Wireless\`
+- **`build_exe.bat`** (Nuitka `--standalone` + MSVC)
   - Auto-detects Visual Studio 2022/2025/2026 (requires "Desktop development with C++" workload)
   - Copies `i18n\*.toml` and `settings.example.json` into the distribution folder
-  - Uses folder mode (not `--onefile`) to reduce Windows Defender false positives
-- **`release_zip.bat`** — packages `dist\DM40 Wireless\` → `release\DM40-Wireless-win64.zip`
+  - Uses folder `--standalone` mode (not `--onefile`) to reduce Windows Defender false positives
+  - To the build output folder: `dist\DM40 Wireless\` <br><br>
+- **`release_zip.bat`** 
+  - Packages: `dist\DM40 Wireless\` → `release\DM40-Wireless-win64.zip`
 
 <br>
 
 **To publish a release on GitHub:**
 
-1. Build the exe and zip (see above).
-2. Create a new Release from `main` with a tag such as `v1.0.0`.
-3. Attach **`DM40-Wireless-win64.zip`** as a release asset.
-4. Source code stays in the repo; users download the zip, developers clone the repo.
+1. Build the exe file using `build_exe.bat` and the zip file using `release_zip.bat` (see above)
+2. Create a new Release from `main` with a tag such as `v1.0.0`
+3. Attach **`DM40-Wireless-win64.zip`** as a release asset
+4. Source code stays in the repo; users download the zip, developers clone the repo
 
 <br>
 
@@ -200,13 +201,14 @@ DM40-Wireless/
 ├── i18n/                     # Language .toml files
 ├── images/                   # UI graphics
 ├── release/                  # Release archives (not in git)
+├── tools/7-Zip               # 7-Zip tool package for release_zip.bat
 ├── dist/                     # Build output (not in git)
 │   └── DM40 Wireless/           # Standalone distribution folder
 │       ├── i18n/                # External language files
 │       ├── DM40 Wireless.exe    # launcher (Windows clickable)
 │       ├── settings.json        # Default runtime config
 │       ├── dm40_ui_state.json   # UI state (auto-generated at runtime)
-│       └── ...                  # Runtime DLLs / bundled data
+│       └── *.dll                # Runtime DLLs / bundled data
 │
 ├── DM40 Wireless.bat         # Dev launcher (Windows clickable)
 ├── app.py, app.pyw           # Entry points
@@ -224,6 +226,7 @@ DM40-Wireless/
 ## Notes:
 
 - This is not an official Alientek product; it is a community / enthusiast project.
+- The multimeter communicates using Bluetooth Low Energy (BLE), BLE support is available for Bluetooth versions 4.0 and above.
 - Bluetooth must be enabled in Windows; if BT is off, the app shows a warning.
 
 
@@ -234,7 +237,7 @@ DM40-Wireless/
 ## License:
 
 <p align="center" width="100%">
-     This project is licensed under the MIT License — Copyright (c) 2026 Urobotos.
+     This project is licensed under the MIT License (open source) — Copyright (c) 2026 Urobotos.
 </p>
 
 <p align="center" width="100%">
