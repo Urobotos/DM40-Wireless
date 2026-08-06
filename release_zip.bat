@@ -56,7 +56,7 @@ if not exist "dist\DM40 Wireless\DM40 Wireless.exe" (
 )
 
 REM --- Ensure external assets exist in the dist folder ---
-echo %STEP%[1/2]%RST% %WHITE%Checking i18n and settings in dist folder...%RST%
+echo %STEP%[1/2]%RST% %WHITE%Checking i18n\ and settings.json in dist folder...%RST%
 echo.
 
 if not exist "dist\DM40 Wireless\i18n" (
@@ -104,12 +104,14 @@ echo.
 echo %CYAN%╔════════════════════════════════════════════════════════════════════════╗%RST%
 echo %CYAN%║%RST%               %GREEN%Creating a release zip was successful! %RST%                  %CYAN%║%RST%
 echo %CYAN%╟————————————————————————————————————————————————————————————————————————╢%RST%
-echo %CYAN%║%RST% %WHITE%Release ready: %OUT% %RST%                        %CYAN%║%RST%
+echo %CYAN%║%RST% %WHITE%Release ready:%RST% %OUT%                         %CYAN%║%RST%
+echo %CYAN%║                                                                        %CYAN%║%RST%
 echo %CYAN%║%RST% %WHITE%Archive contents:%RST%                                                      %CYAN%║%RST%
 echo %CYAN%║%RST%   DM40 Wireless\                                                       %CYAN%║%RST%
-echo %CYAN%║%RST%   i18n\                                                                %CYAN%║%RST%
-echo %CYAN%║%RST%   (runtime DLLs and bundled data)                                      %CYAN%║%RST%
-echo %CYAN%║%RST%   settings.json                                                        %CYAN%║%RST%
+echo %CYAN%║%RST%   ├── i18n\                                                            %CYAN%║%RST%
+echo %CYAN%║%RST%   ├── settings.json                                                    %CYAN%║%RST%
+echo %CYAN%║%RST%   └── *.dll  (runtime DLLs and bundled data)                           %CYAN%║%RST%
+echo %CYAN%║                                                                        %CYAN%║%RST%
 echo %CYAN%╚════════════════════════════════════════════════════════════════════════╝%RST%
 echo.
 echo %NOTE% Users must extract the whole folder and keep files together.

@@ -102,8 +102,8 @@ echo %CYAN%╔══════════════════════
 echo %CYAN%║%RST%                      %GREEN%Installation was successful! %RST%                     %CYAN%║%RST%
 echo %CYAN%╟————————————————————————————————————————————————————————————————————————╢%RST%
 echo %CYAN%║%RST%                                                                        %CYAN%║%RST%
-echo %CYAN%║%RST% %WHITE%— For development, launch:%RST% %YELLOW%DM40 Wireless.bat%RST%                           %CYAN%║%RST%
-echo %CYAN%║%RST% %WHITE%— To build, launch:%RST% %YELLOW%build_exe.bat%RST%                                      %CYAN%║%RST%
+echo %CYAN%║%RST% %WHITE%◦ For development, launch:%RST% %YELLOW%DM40 Wireless.bat%RST%                           %CYAN%║%RST%
+echo %CYAN%║%RST% %WHITE%◦ To build, run:%RST% %YELLOW%build_exe.bat%RST%                                         %CYAN%║%RST%
 echo %CYAN%║%RST%                                                                        %CYAN%║%RST%
 echo %CYAN%╚════════════════════════════════════════════════════════════════════════╝%RST%
 echo.

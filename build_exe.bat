@@ -197,10 +197,12 @@ echo %CYAN%╟——————————————————————
 echo %CYAN%║%RST%  %WHITE%Output folder:%RST% dist\DM40 Wireless\                                    %CYAN%║%RST%
 echo %CYAN%║%RST%                                                                        %CYAN%║%RST%
 echo %CYAN%║%RST%  %WHITE%Distribution folder contents:%RST%                                         %CYAN%║%RST%
-echo %CYAN%║%RST%    dist\DM40 Wireless\DM40 Wireless.exe                                %CYAN%║%RST%
-echo %CYAN%║%RST%    dist\DM40 Wireless\i18n\      (language files)                      %CYAN%║%RST%
-echo %CYAN%║%RST%    dist\DM40 Wireless\           (runtime DLLs / bundled data)         %CYAN%║%RST%
-echo %CYAN%║%RST%    dist\DM40 Wireless\settings.json                                    %CYAN%║%RST%
+echo %CYAN%║%RST%    DM40 Wireless\                                                      %CYAN%║%RST%
+echo %CYAN%║%RST%    ├── DM40 Wireless.exe                                               %CYAN%║%RST%
+echo %CYAN%║%RST%    ├── i18n\      (language files)                                     %CYAN%║%RST%
+echo %CYAN%║%RST%    ├── settings.json                                                   %CYAN%║%RST%
+echo %CYAN%║%RST%    └── *.dll      (runtime DLLs / bundled data)                        %CYAN%║%RST%
+echo %CYAN%║%RST%                                                                        %CYAN%║%RST%
 echo %CYAN%╚════════════════════════════════════════════════════════════════════════╝%RST%
 echo.
 echo %NOTE% Keep the whole folder together - do not move the exe alone.
