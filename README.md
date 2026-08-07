@@ -227,7 +227,7 @@ DM40-Wireless/
 
 - This is not an official Alientek product; it is a community / enthusiast project.
 - The multimeter communicates using Bluetooth Low Energy (BLE), BLE support is available for Bluetooth versions 4.0 and above.
-- Bluetooth must be enabled in Windows; if BT is off, the app shows a warning.
+- Bluetooth must be enabled in Windows, if BT is off, the app shows a warning.
 
 
 <br>
