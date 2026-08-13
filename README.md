@@ -37,7 +37,8 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 
 <br>
 
-> The distribution is a **folder** built with Nuitka (`--standalone`). Keep `DM40 Wireless.exe` together with the other files in that folder (runtime libraries, `i18n\`, `settings.json`). Do not move the `DM40 Wireless.exe` file alone, instead you can create a shortcut on your desktop.
+> The App runs only from the extracted folder — **it does not install**. <br>
+> Do not move the `DM40 Wireless.exe` file outside its own folder, instead you can create a shortcut on your desktop.
 
 <br>
 
@@ -144,7 +145,7 @@ The file lives next to the exe or in the project root. It is not committed to gi
 
 | Key              | Meaning                                                                                      |
 | ---------------- | -------------------------------------------------------------------------------------------- |
-| `target_mac`     | DM40 MAC address (empty `""` = show Connect screen)                                          |
+| `target_mac`     | DM40 MAC address (empty `""` show Connect screen)                                          |
 | `model_name`     | `DM40A`, `DM40B`, or `DM40C`                                                                 |
 | `device_counts`  | Range count scale (40k / 50k / 60k)                                                          |
 | `window_scale`   | Window scale (`1.0` = 480×300 logical px)                                                    |
@@ -185,7 +186,7 @@ release_zip.bat
 1. Build the exe file using `build_exe.bat` and the zip file using `release_zip.bat` (see above)
 2. Create a new Release from `main` with a tag such as `v1.0.0`
 3. Attach **`DM40-Wireless-win64.zip`** as a release asset
-4. Source code stays in the repo; users download the zip, developers clone the repo
+4. Source code stays in the repo, users download the zip, developers clone the repo
 
 <br>
 
@@ -227,7 +228,7 @@ DM40-Wireless/
 
 - This is not an official Alientek product; it is a community / enthusiast project.
 - The multimeter communicates using Bluetooth Low Energy (BLE), BLE support is available for Bluetooth versions 4.0 and above.
-- Bluetooth must be enabled in Windows; if BT is off, the app shows a warning.
+- Bluetooth must be enabled in Windows, if BT is off, the app shows a warning.
 
 
 <br>
