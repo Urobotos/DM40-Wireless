@@ -153,7 +153,7 @@ The file lives next to the exe or in the project root. It is not committed to gi
 | `always_on_top`  | Always on top (boolean: false / true)                                                        |
 | `raw_console`    | RAW console (boolean: false / true)                                                          |
 | `language`       | UI language code matching a file in `i18n/` (e.g. `"en-US"`, `"zh-CN"`, default `"en-US"`)   |
-| `gui_font`       | Configurable UI font family, default `"Arial"`                                                 |
+| `gui_font`       | Configurable UI font family, default `"Arial"`                                               |
 
 <br>
 
