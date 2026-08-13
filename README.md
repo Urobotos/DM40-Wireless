@@ -19,8 +19,8 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 
 ## Requirements:
 
-- **Windows 10/11** with working Bluetooth (BLE)
 - **Alientek DM40** multimeter (A / B / C) within range
+- **Windows 10/11** with working **Bluetooth Low Energy (BLE)** — available for Bluetooth versions 4.0+
 - To run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check **`Add python to PATH`** during installation
 
 <br>
@@ -145,15 +145,15 @@ The file lives next to the exe or in the project root. It is not committed to gi
 
 | Key              | Meaning                                                                                      |
 | ---------------- | -------------------------------------------------------------------------------------------- |
-| `target_mac`     | DM40 MAC address (empty `""` show Connect screen)                                          |
+| `target_mac`     | DM40 MAC address (empty `""` show Connect screen)                                            |
 | `model_name`     | `DM40A`, `DM40B`, or `DM40C`                                                                 |
 | `device_counts`  | Range count scale (40k / 50k / 60k)                                                          |
 | `window_scale`   | Window scale (`1.0` = 480×300 logical px)                                                    |
 | `mini_app`       | Mini mode (boolean: false / true)                                                            |
 | `always_on_top`  | Always on top (boolean: false / true)                                                        |
 | `raw_console`    | RAW console (boolean: false / true)                                                          |
-| `language`       | UI language code matching a file in `i18n/` (e.g. `"en-US"`, `"zh-CN"`; default `"en-US"`)   |
-| `gui_font`       | Configurable UI font family, default `Arial`                                                 |
+| `language`       | UI language code matching a file in `i18n/` (e.g. `"en-US"`, `"zh-CN"`, default `"en-US"`)   |
+| `gui_font`       | Configurable UI font family, default `"Arial"`                                               |
 
 <br>
 
@@ -166,13 +166,13 @@ build_exe.bat
 release_zip.bat
 ```
 
-> **To build the exe**, **Visual Studio 2022/2025/2026** with the **"Desktop development with C++"**workload is required. <br>
+> To build the exe, **Visual Studio 2022/2025/2026** with the **Desktop development with C++** workload is required. <br>
 > The build script (`build_exe.bat`) auto-detects MSVC — no manual path setup needed.
 
 <br>
 
 - **`build_exe.bat`** (Nuitka `--standalone` + MSVC)
-  - Auto-detects Visual Studio 2022/2025/2026 (requires "Desktop development with C++" workload)
+  - Auto-detects Visual Studio 2022/2025/2026 (requires `Desktop development with C++` workload)
   - Copies `i18n\*.toml` and `settings.example.json` into the distribution folder
   - Uses folder `--standalone` mode (not `--onefile`) to reduce Windows Defender false positives
   - To the build output folder: `dist\DM40 Wireless\` <br><br>
@@ -205,11 +205,11 @@ DM40-Wireless/
 ├── tools/7-Zip               # 7-Zip tool package for release_zip.bat
 ├── dist/                     # Build output (not in git)
 │   └── DM40 Wireless/           # Standalone distribution folder
-│       ├── i18n/                # External language files
-│       ├── DM40 Wireless.exe    # launcher (Windows clickable)
-│       ├── settings.json        # Default runtime config
-│       ├── dm40_ui_state.json   # UI state (auto-generated at runtime)
-│       └── *.dll                # Runtime DLLs / bundled data
+│       ├── i18n/                  # External language files
+│       ├── DM40 Wireless.exe      # launcher (Windows clickable)
+│       ├── settings.json          # Default runtime config
+│       ├── dm40_ui_state.json     # UI state (auto-generated at runtime)
+│       └── *.dll                  # Runtime DLLs / bundled data
 │
 ├── DM40 Wireless.bat         # Dev launcher (Windows clickable)
 ├── app.py, app.pyw           # Entry points
@@ -226,7 +226,7 @@ DM40-Wireless/
 
 ## Notes:
 
-- This is not an official Alientek product; it is a community / enthusiast project.
+- This is not an official Alientek product, it is a community / enthusiast project.
 - The multimeter communicates using Bluetooth Low Energy (BLE), BLE support is available for Bluetooth versions 4.0 and above.
 - Bluetooth must be enabled in Windows, if BT is off, the app shows a warning.
 
