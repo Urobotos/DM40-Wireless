@@ -19,8 +19,8 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 
 ## Requirements:
 
-- **Windows 10/11** with working Bluetooth (BLE)
 - **Alientek DM40** multimeter (A / B / C) within range
+- **Windows 10/11** with working **Bluetooth Low Energy (BLE)** — available for Bluetooth versions 4.0+
 - To run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check **`Add python to PATH`** during installation
 
 <br>
@@ -152,8 +152,8 @@ The file lives next to the exe or in the project root. It is not committed to gi
 | `mini_app`       | Mini mode (boolean: false / true)                                                            |
 | `always_on_top`  | Always on top (boolean: false / true)                                                        |
 | `raw_console`    | RAW console (boolean: false / true)                                                          |
-| `language`       | UI language code matching a file in `i18n/` (e.g. `"en-US"`, `"zh-CN"`; default `"en-US"`)   |
-| `gui_font`       | Configurable UI font family, default `Arial`                                                 |
+| `language`       | UI language code matching a file in `i18n/` (e.g. `"en-US"`, `"zh-CN"`, default `"en-US"`)   |
+| `gui_font`       | Configurable UI font family, default `"Arial"`                                                 |
 
 <br>
 
@@ -166,13 +166,13 @@ build_exe.bat
 release_zip.bat
 ```
 
-> **To build the exe**, **Visual Studio 2022/2025/2026** with the **"Desktop development with C++"**workload is required. <br>
+> To build the exe, **Visual Studio 2022/2025/2026** with the **Desktop development with C++** workload is required. <br>
 > The build script (`build_exe.bat`) auto-detects MSVC — no manual path setup needed.
 
 <br>
 
 - **`build_exe.bat`** (Nuitka `--standalone` + MSVC)
-  - Auto-detects Visual Studio 2022/2025/2026 (requires "Desktop development with C++" workload)
+  - Auto-detects Visual Studio 2022/2025/2026 (requires `Desktop development with C++` workload)
   - Copies `i18n\*.toml` and `settings.example.json` into the distribution folder
   - Uses folder `--standalone` mode (not `--onefile`) to reduce Windows Defender false positives
   - To the build output folder: `dist\DM40 Wireless\` <br><br>
