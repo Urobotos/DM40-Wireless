@@ -205,11 +205,11 @@ DM40-Wireless/
 ├── tools/7-Zip               # 7-Zip tool package for release_zip.bat
 ├── dist/                     # Build output (not in git)
 │   └── DM40 Wireless/           # Standalone distribution folder
-│       ├── i18n/                # External language files
-│       ├── DM40 Wireless.exe    # launcher (Windows clickable)
-│       ├── settings.json        # Default runtime config
-│       ├── dm40_ui_state.json   # UI state (auto-generated at runtime)
-│       └── *.dll                # Runtime DLLs / bundled data
+│       ├── i18n/                  # External language files
+│       ├── DM40 Wireless.exe      # launcher (Windows clickable)
+│       ├── settings.json          # Default runtime config
+│       ├── dm40_ui_state.json     # UI state (auto-generated at runtime)
+│       └── *.dll                  # Runtime DLLs / bundled data
 │
 ├── DM40 Wireless.bat         # Dev launcher (Windows clickable)
 ├── app.py, app.pyw           # Entry points
