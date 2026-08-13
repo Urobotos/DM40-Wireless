@@ -145,7 +145,7 @@ The file lives next to the exe or in the project root. It is not committed to gi
 
 | Key              | Meaning                                                                                      |
 | ---------------- | -------------------------------------------------------------------------------------------- |
-| `target_mac`     | DM40 MAC address (empty `""` show Connect screen)                                          |
+| `target_mac`     | DM40 MAC address (empty `""` show Connect screen)                                            |
 | `model_name`     | `DM40A`, `DM40B`, or `DM40C`                                                                 |
 | `device_counts`  | Range count scale (40k / 50k / 60k)                                                          |
 | `window_scale`   | Window scale (`1.0` = 480×300 logical px)                                                    |
@@ -226,7 +226,7 @@ DM40-Wireless/
 
 ## Notes:
 
-- This is not an official Alientek product; it is a community / enthusiast project.
+- This is not an official Alientek product, it is a community / enthusiast project.
 - The multimeter communicates using Bluetooth Low Energy (BLE), BLE support is available for Bluetooth versions 4.0 and above.
 - Bluetooth must be enabled in Windows, if BT is off, the app shows a warning.
 
