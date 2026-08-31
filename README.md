@@ -4,7 +4,7 @@
     <img width="50%" src="images/alientek.png" alt="Alientek Logo">
 </p>
 
-A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the wireless **Alientek DM40** multimeter (DM40A, DM40B, DM40C). The UI mirrors the device display, including measurement modes, ranges, HOLD, and saved values.
+A Windows and Linux desktop app that connects over **Bluetooth Low Energy (BLE)** to the wireless **Alientek DM40** multimeter (DM40A, DM40B, DM40C). The UI mirrors the device display, including measurement modes, ranges, HOLD, and saved values.
 
 **Repository:** [github.com/Urobotos/DM40-Wireless](https://github.com/Urobotos/DM40-Wireless)
 
@@ -20,7 +20,8 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 ## Requirements:
 
 - **Alientek DM40** multimeter (A / B / C) within range
-- **Windows 10/11** with working **Bluetooth Low Energy (BLE)** — available for Bluetooth versions 4.0+
+- **Windows 10/11** or **Linux** with `BlueZ` stack
+- **Bluetooth Low Energy (BLE)** — available for Bluetooth versions 4.0+ 
 - To run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check **`Add python to PATH`** during installation
 
 <br>
@@ -39,6 +40,44 @@ A Windows desktop app that connects over **Bluetooth Low Energy (BLE)** to the w
 
 > The App runs only from the extracted folder — **it does not install**. <br>
 > Do not move the `DM40 Wireless.exe` file outside its own folder, instead you can create a shortcut on your desktop.
+
+<br>
+
+## Running on Linux (end users):
+
+- Install system dependencies (Tkinter):
+  - For CachyOS / Arch Linux:
+  ```bash
+  sudo pacman -S tk
+  ```
+  - For Ubuntu / Debian:
+  ```bash
+  sudo apt install python3-tk
+  ```
+
+- Download the DM40-Wireless repository and enter the folder:
+```bash
+git clone git@github.com:Urobotos/DM40-Wireless.git
+cd DM40-Wireless
+```
+
+- Create and activate virtual environment (venv):
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+- Install Python packages inside venv:
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+- Then run the app by:
+```bash
+python app.py
+```
+
 
 <br>
 
