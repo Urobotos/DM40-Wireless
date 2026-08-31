@@ -43,22 +43,41 @@ A Windows and Linux desktop app that connects over **Bluetooth Low Energy (BLE)*
 
 <br>
 
-## Running on Linux
-```
+## Running on Linux (end users):
+
+- Install system dependencies (Tkinter):
+  - For CachyOS / Arch Linux:
+  ```bash
+  sudo pacman -S tk
+  ```
+  - For Ubuntu / Debian:
+  ```bash
+  sudo apt install python3-tk
+  ```
+
+- Download the DM40-Wireless repository and enter the folder:
+```bash
 git clone git@github.com:Urobotos/DM40-Wireless.git
 cd DM40-Wireless
 ```
 
-```
-python3 -m venv .venv # Create venv
+- Create and activate virtual environment (venv):
+```bash
+python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt # Install deps
 ```
 
+- Install Python packages inside venv:
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
-python app.py # Run app
+
+- Then run the app by:
+```bash
+python app.py
 ```
+
 
 <br>
 
