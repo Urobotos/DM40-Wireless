@@ -20,7 +20,7 @@ A Windows and Linux desktop app that connects over **Bluetooth Low Energy (BLE)*
 ## Requirements:
 
 - **Alientek DM40** multimeter (A / B / C) within range
-- **Windows 10/11** with working **Bluetooth Low Energy (BLE)** — available for Bluetooth versions 4.0+ or **Linux** with bluez stack
+- **Windows 10/11** with working **Bluetooth Low Energy (BLE)** — available for Bluetooth versions 4.0+ or **Linux** with BlueZ stack
 - To run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check **`Add python to PATH`** during installation
 
 <br>
@@ -35,21 +35,29 @@ A Windows and Linux desktop app that connects over **Bluetooth Low Energy (BLE)*
 4. On first launch, the **Connect** screen appears — search for your meter, select it in the list, and click **Connect**. <br>
    The MAC address is saved to `settings.json` next to the exe, on the next launch the app connects automatically.
 
-## Running on Linux
-```
-git clone git@github.com:Urobotos/DM40-Wireless.git
-cd DM40-Wireless
-python3 -m venv .venv # Create venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt # Install deps
-python app.py # Run app
-```
-
 <br>
 
 > The App runs only from the extracted folder — **it does not install**. <br>
 > Do not move the `DM40 Wireless.exe` file outside its own folder, instead you can create a shortcut on your desktop.
+
+<br>
+
+## Running on Linux
+```
+git clone git@github.com:Urobotos/DM40-Wireless.git
+cd DM40-Wireless
+```
+
+```
+python3 -m venv .venv # Create venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt # Install deps
+```
+
+```
+python app.py # Run app
+```
 
 <br>
 
