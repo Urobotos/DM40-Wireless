@@ -22,7 +22,6 @@ A Windows and Linux desktop app that connects over **Bluetooth Low Energy (BLE)*
 - **Alientek DM40** multimeter (A / B / C) within range
 - **Windows 10/11** or **Linux** with `BlueZ` stack
 - **Bluetooth Low Energy (BLE)** — available for Bluetooth versions 4.0+ 
-- To run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check **`Add python to PATH`** during installation
 
 <br>
 
@@ -156,6 +155,9 @@ Changes are saved to `settings.json`.
 ---
 
 ## Running from source (developers):
+
+- Requirements to run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check **`Add python to PATH`** during installation
+
 ```powershell
 # Windows PowerShell:
 
