@@ -22,7 +22,6 @@ A Windows and Linux desktop app that connects over **Bluetooth Low Energy (BLE)*
 - **Alientek DM40** multimeter (A / B / C) within range
 - **Windows 10/11** or **Linux** with `BlueZ` stack
 - **Bluetooth Low Energy (BLE)** — available for Bluetooth versions 4.0+ 
-- To run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check **`Add python to PATH`** during installation
 
 <br>
 
@@ -73,39 +72,16 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
+- On first run, copy the settings template:
+```bash
+cp settings.example.json settings.json
+```
+
 - Then run the app by:
 ```bash
 python app.py
 ```
 
-
-<br>
-
----
-
-## Running from source (developers):
-
-```bat
-git clone -b develop https://github.com/Urobotos/DM40-Wireless.git
-cd DM40-Wireless
-.\install.bat
-```
-
-*(* `install.bat` *creates* `.venv`*, installs dependencies from* `requirements.txt`*, and installs* `Nuitka` *for building )* <br><br>
-
-On first run, copy the settings template:
-
-```bat
-copy settings.example.json settings.json
-```
-
-<br>
-Then start the app using one of these:
-
-| Method                       | Description                                                                          |
-| ---------------------------- | ------------------------------------------------------------------------------------ |
-| **`DM40 Wireless.bat`**      | Recommended (Windows clickable) - runs `app.pyw` without a console                   |
-| **`app.py`**                 | PowerShell cmd: `.\.venv\Scripts\python.exe app.py` - with console (debugging, logs) |
 
 <br>
 
@@ -178,6 +154,38 @@ Changes are saved to `settings.json`.
 
 ---
 
+## Running from source (developers):
+
+- Requirements to run from source: **Python 3.11+** ([python.org](https://www.python.org/)) — check **`Add python to PATH`** during installation
+
+```powershell
+# Windows PowerShell:
+
+git clone -b develop https://github.com/Urobotos/DM40-Wireless.git
+cd DM40-Wireless
+.\install.bat
+```
+
+*(* `install.bat` *creates* `.venv`*, installs dependencies from* `requirements.txt`*, and installs* `Nuitka` *for building )* <br><br>
+
+On first run, copy the settings template:
+
+```powershell
+copy settings.example.json settings.json
+```
+
+<br>
+Then start the app using one of these:
+
+| Method                       | Description                                                                          |
+| ---------------------------- | ------------------------------------------------------------------------------------ |
+| **`DM40 Wireless.bat`**      | Recommended (Windows clickable) - runs `app.pyw` without a console                   |
+| **`app.py`**                 | PowerShell cmd: `.\.venv\Scripts\python.exe app.py` - with console (debugging, logs) |
+
+<br>
+
+---
+
 ## Configuration (`settings.json`):
 
 The file lives next to the exe or in the project root. It is not committed to git — use `settings.example.json` as a template.
@@ -199,8 +207,9 @@ The file lives next to the exe or in the project root. It is not committed to gi
 ---
 
 ## Building the exe and release zip (maintainers):
+```powershell
+# Windows PowerShell:
 
-```bat
 build_exe.bat
 release_zip.bat
 ```
