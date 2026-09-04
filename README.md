@@ -73,6 +73,11 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
+- On first run, copy the settings template:
+```bash
+cp settings.example.json settings.json
+```
+
 - Then run the app by:
 ```bash
 python app.py
@@ -151,8 +156,9 @@ Changes are saved to `settings.json`.
 ---
 
 ## Running from source (developers):
+```powershell
+# Windows PowerShell:
 
-```bat
 git clone -b develop https://github.com/Urobotos/DM40-Wireless.git
 cd DM40-Wireless
 .\install.bat
@@ -162,7 +168,7 @@ cd DM40-Wireless
 
 On first run, copy the settings template:
 
-```bat
+```powershell
 copy settings.example.json settings.json
 ```
 
@@ -199,8 +205,9 @@ The file lives next to the exe or in the project root. It is not committed to gi
 ---
 
 ## Building the exe and release zip (maintainers):
+```powershell
+# Windows PowerShell:
 
-```bat
 build_exe.bat
 release_zip.bat
 ```
