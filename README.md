@@ -83,34 +83,6 @@ python app.py
 
 ---
 
-## Running from source (developers):
-
-```bat
-git clone -b develop https://github.com/Urobotos/DM40-Wireless.git
-cd DM40-Wireless
-.\install.bat
-```
-
-*(* `install.bat` *creates* `.venv`*, installs dependencies from* `requirements.txt`*, and installs* `Nuitka` *for building )* <br><br>
-
-On first run, copy the settings template:
-
-```bat
-copy settings.example.json settings.json
-```
-
-<br>
-Then start the app using one of these:
-
-| Method                       | Description                                                                          |
-| ---------------------------- | ------------------------------------------------------------------------------------ |
-| **`DM40 Wireless.bat`**      | Recommended (Windows clickable) - runs `app.pyw` without a console                   |
-| **`app.py`**                 | PowerShell cmd: `.\.venv\Scripts\python.exe app.py` - with console (debugging, logs) |
-
-<br>
-
----
-
 ## App Screenshots:
 
 <p style="text-align: left">
@@ -173,6 +145,34 @@ Connection status, meter battery, and units are shown in the top bar from live B
 | **Language**            | Tap the current language to pick from installed `.toml` files. The folder icon opens `i18n\` for custom translations     |
 
 Changes are saved to `settings.json`.
+
+<br>
+
+---
+
+## Running from source (developers):
+
+```bat
+git clone -b develop https://github.com/Urobotos/DM40-Wireless.git
+cd DM40-Wireless
+.\install.bat
+```
+
+*(* `install.bat` *creates* `.venv`*, installs dependencies from* `requirements.txt`*, and installs* `Nuitka` *for building )* <br><br>
+
+On first run, copy the settings template:
+
+```bat
+copy settings.example.json settings.json
+```
+
+<br>
+Then start the app using one of these:
+
+| Method                       | Description                                                                          |
+| ---------------------------- | ------------------------------------------------------------------------------------ |
+| **`DM40 Wireless.bat`**      | Recommended (Windows clickable) - runs `app.pyw` without a console                   |
+| **`app.py`**                 | PowerShell cmd: `.\.venv\Scripts\python.exe app.py` - with console (debugging, logs) |
 
 <br>
 
